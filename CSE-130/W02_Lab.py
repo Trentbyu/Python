@@ -32,20 +32,22 @@ def get_user_info():
 
 
 def check_info(user_name, pass_word):
+    """This function checks if the user name and password are 
+        at the same index in the list created from the json file 
+    """
+    authenticated = False #tells the computer if the user  has been authenticated yet 
 
-    authenticated = False
 
-
-    user_name_list = []
-    for i in data['username']:
+    user_name_list = [] #creates a list for the usernames  
+    for i in data['username']:# only appends data inside the username 
         user_name_list.append(i)
 
-    pass_word_list = []
-    for i in data['password']:
+    pass_word_list = [] #creates a list for the passwords 
+    for i in data['password']: # only appends data inside the password
         pass_word_list.append(i)
 
     for x in range(len(user_name_list)):
-        if user_name == user_name_list[x] and pass_word == pass_word_list[x]:
+        if user_name == user_name_list[x] and pass_word == pass_word_list[x]: #checks if the password and username has the same index in their lists
             print("You are authenticated!")
             authenticated = True
             
@@ -53,13 +55,13 @@ def check_info(user_name, pass_word):
     return authenticated
 
 
-def vaild(authenticated):
+def vaild(authenticated): #if the user is not authenticated the computer responds 
     if authenticated == False: 
         print("You are not authorized to use the system.")
 
 
-def main():
-    user_name, pass_word = get_user_info()
+def main(): #main function
+    user_name, pass_word = get_user_info() # getting varibles for other function
     authenticated = check_info(user_name, pass_word)
     vaild(authenticated)
 
