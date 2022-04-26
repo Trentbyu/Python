@@ -15,6 +15,8 @@ is defined as the square root of the variance.  The variance is
 defined as the average of the squared differences from the mean.
 """
 
+import timeit
+
 def standard_deviation_1(numbers):
     total = 0
     count = 0
@@ -55,6 +57,17 @@ def standard_deviation_3(numbers):
     return variance ** 0.5
 
 numbers = [600, 470, 170, 430, 300]
+
 print(standard_deviation_1(numbers))  # Should be 147.322 
 print(standard_deviation_2(numbers))  # Should be 147.322 
 print(standard_deviation_3(numbers))  # Should be 147.322 
+
+
+
+count1 = standard_deviation_1(numbers)
+count2 = standard_deviation_2(numbers)
+count3 = standard_deviation_3(numbers)
+time1 = timeit.timeit( number=1, globals=globals()) 
+time2 = timeit.timeit(number=1, globals=globals()) 
+time3 = timeit.timeit(number=1, globals=globals()) 
+print("{:>15}            {:>15}            {:>15}".format( time1, time2, time3))
