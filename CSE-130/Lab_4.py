@@ -68,12 +68,13 @@ def calculations(pacific_avenue, north_carolina, pennsylvania_avenue, cash, hous
  hotels, purchase_hotel, purchase_house, swap_hotel, swap_house):
     price = 0
     final = True
+    
     for x in range(0,3):
         price += purchase_hotel[x] * 200
         price += purchase_house[x] * 200
         
 
-    if price < cash: 
+    if price > cash: 
         print("You do not have sufficient funds to purchase a hotel at this time.")
         final = False
     if hotels < 1 or hotels < purchase_hotel[0] + purchase_hotel[1] + purchase_hotel[2]: 
@@ -82,18 +83,24 @@ def calculations(pacific_avenue, north_carolina, pennsylvania_avenue, cash, hous
     if houses < 1 or  houses < purchase_house[0] + purchase_house[1] + purchase_house[2]: 
         print("There are not enough houses available for purchase at this time.")
         final = False
+    if pacific_avenue ==5 and purchase_hotel[0] == 1 or north_carolina ==5 and purchase_hotel[1] == 1 or pennsylvania_avenue ==5 and purchase_hotel[2] == 1 :
+        print("You cannot purchase a hotel if the property already has one.")
+        final = False
     
 
     
     return price , final
 
 
-def print_final(price):
-    print(f'''This will cost ${price}.
-        Purchase 1 hotel and [number of houses] house(s).
-        Put 1 hotel on Pennsylvania and return any houses to the bank.
-        Put [number of houses] house(s) on North Carolina.
-        Put [number of houses] house(s) on Pacific.''')
+def print_final(price, final):
+    if final == True:
+        print(f'''This will cost ${price}.
+            Purchase 1 hotel and [number of houses] house(s).
+            Put 1 hotel on Pennsylvania and return any houses to the bank.
+            Put [number of houses] house(s) on North Carolina.
+            Put [number of houses] house(s) on Pacific.''')
+
+
 def main():
 
     owned = input("Do you own pacific_avenue, north_carolina, pennsylvania_avenue? Y/N")
@@ -104,8 +111,8 @@ def main():
         price, final = calculations(pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses, hotels, purchase_hotel,
          purchase_house, swap_hotel, swap_house)
 
-        if final is True:
-         print_final(price)
+        
+        print_final(price, final)
         
     else: 
         print("You cannot purchase a hotel until you own all the properties of a given color group.")
