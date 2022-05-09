@@ -94,11 +94,8 @@ def calculations(pacific_avenue, north_carolina, pennsylvania_avenue, cash, hous
 
 def print_final(price, final):
     if final == True:
-        print(f'''This will cost ${price}.
-            Purchase 1 hotel and [number of houses] house(s).
-            Put 1 hotel on Pennsylvania and return any houses to the bank.
-            Put [number of houses] house(s) on North Carolina.
-            Put [number of houses] house(s) on Pacific.''')
+        print(f'This will cost ${price}.')
+           
 
 
 def main():
