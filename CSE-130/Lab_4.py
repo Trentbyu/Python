@@ -92,11 +92,19 @@ def calculations(pacific_avenue, north_carolina, pennsylvania_avenue, cash, hous
     return price , final
 
 
-def print_final(price, final):
+def print_final(price, final, purchase_hotel, purchase_house):
+    
+   
+    
     if final == True:
         print(f'This will cost ${price}.')
-           
-
+        print (f'\tPurchase {purchase_hotel[0] + purchase_hotel[1] + purchase_hotel[2]} hotel and {purchase_house[0] + purchase_house[1] + purchase_house[2]} house(s).')
+        if purchase_hotel[0]== 1 :
+            print("Put 1 hotel on Pacific Avenue and return any houses to the bank.")
+        if purchase_hotel[1]== 1 :
+            print("Put 1 hotel on Norh carloina and return any houses to the bank.")
+        if purchase_hotel[2]== 1 :
+            print("Put 1 hotel on Pennsylvania avenu and return any houses to the bank.")
 
 def main():
 
@@ -109,7 +117,7 @@ def main():
          purchase_house, swap_hotel, swap_house)
 
         
-        print_final(price, final)
+        print_final(price, final, purchase_hotel, purchase_house)
         
     else: 
         print("You cannot purchase a hotel until you own all the properties of a given color group.")
