@@ -9,11 +9,30 @@
 #     is correct or if it is wrong. in a json file there are a list of passwords
 #       and usernames that will get authentication if use.
 # 4. What was the hardest part? Be as specific as possible.
-#      The hardest part for me was outputing if the user 
-#       was not authenticated becuae i could not put it in the 
-#       for loop.
+'''
+1.Was the syntax of Python the hardest part? If so, what part?
+    i dont think was the hardest part but it is hard to remember all of the syntax rules.
+    the hardestr rules to remeber for me are how things are supposed to be written.
+
+2.Was there some aspect of the problem that was particularly difficult to solve?
+    it took me a little while to figure out how to add the comment you are not authenticated 
+    if the user did not get enter in a combination. i first had it in the for loop but then it would display for every
+    loop. which is not what i wanted. 
+3.Was there an especially difficult bug? If so, how did you resolve it?
+    i think the bug was the same as the hardest problem from the question above and i solved it by when
+    a user was authenticated it returned a False vaule and was pasted to a new function and then displayed
+    you are not authenticated. This way it only dispalys it one time.
+4.Was there some difficulty with the instructions or any part of the problem definition?
+    for the instruction were not hard but i needed to read all of them. i did not realise unitl i read carefully 
+    that it is important to you the test cases given not my own. 
+
+'''
 # 5. How long did it take for you to complete the assignment?
-#      0.3
+#      1.5
+
+
+
+
 import json
 
 # Opening JSON file
@@ -34,9 +53,10 @@ def get_user_info():
 
 def check_info(user_name, pass_word):
     """This function checks if the user name and password are 
-        at the same index in the list created from the json file 
+        at the same index in the list created from the json file.
     """
-    authenticated = False #tells the computer if the user  has been authenticated yet 
+    #tells the computer if the user  has been authenticated yet 
+    authenticated = False 
 
     user_name_list = [] #creates a list for the usernames  
     for i in data['username']:# only appends data inside the username 
