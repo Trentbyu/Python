@@ -29,14 +29,23 @@ def get_info():
 
 
 def user_choice():
-    purchase_hotel = int(input("do you want to purchase a hotel type 1? if no type no. "))
-    purchase_house = int(input("do you want to purchase a house type 1-4? if no type no. "))
-    swap_hotel = input("do you want to swap hotel? for no type no ")
-    swap_house = input("do you want to swap house? for no type no ")
+    purchase_hotel = input("do you want to purhcase a hotel? y/n")
+    if purchase_hotel.lower() == "y":
+        purchase_hotel_pc = int(input("do you want to purchase a hotel on pc type 1? if no type 0. "))
+        purchase_hotel_pc = int(input("do you want to purchase a hotel on nc type 1? if no type 0. "))
+        purchase_hotel_pc = int(input("do you want to purchase a hotel on pa type 1? if no type 0. "))
+            
+    purchase_house = int(input("do you want to purchase a house type how many 1-12? if no type 0 "))
+    swap_hotel = input("do you want to swap a hotel? y/n ")
+    if swap_hotel.lower() == "y":
+        s_hl = input("swap pc? nc? or pa?")
+        s_hl2 = input(f'swap {s_hl} with pc? nc? or pa?') 
+    swap_house = input("do you want to swap a house? y/n ")
 
-    return purchase_hotel, purchase_house, swap_hotel, swap_house
+    return purchase_hotel, purchase_house, swap_hotel, swap_house 
 
-def calculations(pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses, hotels, purchase_hotel, purchase_house, swap_hotel, swap_house):
+def calculations(pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses,
+ hotels, purchase_hotel, purchase_house, swap_hotel, swap_house):
 
     price = 200 * purchase_house + 200 * purchase_house
 
@@ -60,7 +69,10 @@ def main():
 
         pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses, hotels = get_info()
         purchase_hotel, purchase_house, swap_hotel, swap_house = user_choice()
-        price = calculations(pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses, hotels, purchase_hotel, purchase_house, swap_hotel, swap_house)
+        price = calculations(pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses, hotels, purchase_hotel,
+         purchase_house, swap_hotel, swap_house)
+
+
         print(f'''This will cost ${price}.
         Purchase 1 hotel and [number of houses] house(s).
         Put 1 hotel on Pennsylvania and return any houses to the bank.
