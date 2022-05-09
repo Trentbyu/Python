@@ -32,36 +32,68 @@ def user_choice():
     purchase_hotel = input("do you want to purhcase a hotel? y/n")
     if purchase_hotel.lower() == "y":
         purchase_hotel_pc = int(input("do you want to purchase a hotel on pc type 1? if no type 0. "))
-        purchase_hotel_pc = int(input("do you want to purchase a hotel on nc type 1? if no type 0. "))
-        purchase_hotel_pc = int(input("do you want to purchase a hotel on pa type 1? if no type 0. "))
-            
-    purchase_house = int(input("do you want to purchase a house type how many 1-12? if no type 0 "))
+        purchase_hotel_nc = int(input("do you want to purchase a hotel on nc type 1? if no type 0. "))
+        purchase_hotel_pa = int(input("do you want to purchase a hotel on pa type 1? if no type 0. "))  
+        purchase_hotel = [purchase_hotel_pc, purchase_hotel_nc, purchase_hotel_pa]        
+    else:
+        purchase_hotel = [0,0,0]
+    
+    purchase_house = input("do you want to purhcase a house? y/n")
+    if purchase_house.lower() == "y":
+        purchase_house_pc = int(input("do you want to purchase a house on pc type 1-4? if no type 0. "))
+        purchase_house_nc = int(input("do you want to purchase a house on nc type 1-4? if no type 0. "))
+        purchase_house_pa = int(input("do you want to purchase a house on pa type 1-4? if no type 0. "))
+        purchase_house = [purchase_house_pc, purchase_house_nc, purchase_house_pa]  
+    else:
+        purchase_house = [0,0,0] 
+
     swap_hotel = input("do you want to swap a hotel? y/n ")
     if swap_hotel.lower() == "y":
-        s_hl = input("swap pc? nc? or pa?")
-        s_hl2 = input(f'swap {s_hl} with pc? nc? or pa?') 
-    swap_house = input("do you want to swap a house? y/n ")
+        s_h = input("swap pc? nc? or pa?")
+        s_h2 = input(f'swap {s_hl} with pc? nc? or pa?')
+        s_hotel = [s_h, s_h2] 
+    else:
+        s_hotel = []
 
-    return purchase_hotel, purchase_house, swap_hotel, swap_house 
+    swap_house = input("do you want to swap a house? y/n ")
+    if swap_house.lower() == "y":
+        s_hl = input("swap pc? nc? or pa?")
+        s_hl2 = input(f'swap {s_hl} with pc? nc? or pa?')
+        s_house = [s_hl, s_hl2]
+    else:
+        s_house = [] 
+    return purchase_hotel, purchase_house, s_hotel, s_house 
 
 def calculations(pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses,
  hotels, purchase_hotel, purchase_house, swap_hotel, swap_house):
+    price = 0
+    final = True
+    for x in range(0,3):
+        price += purchase_hotel[x] * 200
+        price += purchase_house[x] * 200
+        
 
-    price = 200 * purchase_house + 200 * purchase_house
-
-    if price < 200: 
+    if price < cash: 
         print("You do not have sufficient funds to purchase a hotel at this time.")
-    if hotels < 1: 
+        final = False
+    if hotels < 1 or hotels < purchase_hotel[0] + purchase_hotel[1] + purchase_hotel[2]: 
         print("There are not enough hotels available for purchase at this time.")
-    if houses < 1: 
+        final = False
+    if houses < 1 or  houses < purchase_house[0] + purchase_house[1] + purchase_house[2]: 
         print("There are not enough houses available for purchase at this time.")
-    if pacific_avenue == 5:
-        print()
+        final = False
     
 
     
-    return price 
-    
+    return price , final
+
+
+def print_final(price):
+    print(f'''This will cost ${price}.
+        Purchase 1 hotel and [number of houses] house(s).
+        Put 1 hotel on Pennsylvania and return any houses to the bank.
+        Put [number of houses] house(s) on North Carolina.
+        Put [number of houses] house(s) on Pacific.''')
 def main():
 
     owned = input("Do you own pacific_avenue, north_carolina, pennsylvania_avenue? Y/N")
@@ -69,15 +101,12 @@ def main():
 
         pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses, hotels = get_info()
         purchase_hotel, purchase_house, swap_hotel, swap_house = user_choice()
-        price = calculations(pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses, hotels, purchase_hotel,
+        price, final = calculations(pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses, hotels, purchase_hotel,
          purchase_house, swap_hotel, swap_house)
 
-
-        print(f'''This will cost ${price}.
-        Purchase 1 hotel and [number of houses] house(s).
-        Put 1 hotel on Pennsylvania and return any houses to the bank.
-        Put [number of houses] house(s) on North Carolina.
-        Put [number of houses] house(s) on Pacific.''')
+        if final is True:
+         print_final(price)
+        
     else: 
         print("You cannot purchase a hotel until you own all the properties of a given color group.")
 
