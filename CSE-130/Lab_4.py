@@ -56,17 +56,11 @@ def user_choice():
     else:
         s_hotel = [' ',' ']
 
-    swap_house = input("do you want to swap a house? y/n ")
-    if swap_house.lower() == "y":
-        s_hl = input("swap pc? nc? or pa?")
-        s_hl2 = input(f'swap {s_hl} with pc? nc? or pa?')
-        s_house = [s_hl, s_hl2]
-    else:
-        s_house = [' ', ' '] 
-    return purchase_hotel, purchase_house, s_hotel, s_house 
+ 
+    return purchase_hotel, purchase_house, s_hotel
 
 def calculations(pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses,
- hotels, purchase_hotel, purchase_house,  s_hotel, s_house ):
+ hotels, purchase_hotel, purchase_house,  s_hotel ):
     price = 0
     final = True
     swap = ' '
@@ -95,7 +89,7 @@ def calculations(pacific_avenue, north_carolina, pennsylvania_avenue, cash, hous
             pennsylvania_avenue = temp
             swap = 'ncpa'
 
-    if s_hotel[1].lower() == "pa":
+    if s_hotel[0].lower() == "pa":
         temp = pennsylvania_avenue
         if s_hotel[1] == "pc":
             pacific_avenue = pacific_avenue
@@ -130,25 +124,84 @@ def calculations(pacific_avenue, north_carolina, pennsylvania_avenue, cash, hous
     return price , final, swap
 
 
-def print_final(price, final, purchase_hotel, purchase_house, s_hotel, s_house, swap, pacific_avenue, north_carolina, pennsylvania_avenue,):
+def print_final(price, final, purchase_hotel, purchase_house, s_hotel, swap, pacific_avenue, north_carolina, pennsylvania_avenue,):
     
+    houses = ' '
+    property = ''
+    property1 = 'hotel'
+    num = ''
     if swap != ' ':
         if swap == 'pcnc':
-            print("Swap pc hotel with nc 4 houses.")
+            if north_carolina < 5:
+                houses = north_carolina
+            if north_carolina == 5:
+                property = "hotel" 
+            else:
+                property="houses"
+            if pacific_avenue < 5:
+                num = pacific_avenue
+                property1 = 'houses'
+            print(f"\nSwap Pacific Avenue {str(num)} {property1 } with North Carolina {houses} {property} .")
         if swap == 'pcpa':
-            print("swap pc with pa")
+            if pennsylvania_avenue < 5:
+                houses = pennsylvania_avenue
+            if pennsylvania_avenue == 5:
+                property = "hotel" 
+            else:
+                property="houses"
+            if pacific_avenue < 5:
+                num = pacific_avenue
+                property1 = 'houses'
+            print(f"\nSwap Pacific Avenue {str(num)} {property1 } with Pennsylvania avenu {houses} {property}.")
         if swap == 'ncpa':
-            print("swap nc with pa")
+            if pennsylvania_avenue < 5:
+                houses = pennsylvania_avenue
+            if pennsylvania_avenue == 5:
+                property = "hotel" 
+            else:
+                property="houses"
+            if north_carolina < 5:
+                num = north_carolina
+                property1 = 'houses'
+            print(f"\nSwap North Carolina {str(num)} {property1 } with Pennsylvania avenu {houses}{property}.")
         if swap == "ncpc":
-            print("swap nc with pa")
+            if pacific_avenue < 5:
+                houses = pacific_avenue
+            if pacific_avenue == 5:
+                property = "hotel" 
+            else:
+                property="houses"
+            if north_carolina < 5:
+                num = north_carolina
+                property1 = 'houses'
+            print(f"\nSwap North Carolina {str(num)} {property1 } with Pacific Avenue {houses} {property} .")
         if swap == "panc":
-            print("sawp pa with nc")
+            if north_carolina < 5:
+                houses = north_carolina
+            if north_carolina == 5:
+                property = "hotel" 
+            else:
+                property="houses"
+            if pennsylvania_avenue < 5:
+                num = pennsylvania_avenue
+                property1 = 'houses'
+            print(f"\nSwap Pennsylvania avenu {str(num)} {property1 } with North Carolina {houses} {property}.")
+        
         if swap == "papc":
-            print("swap pa with pc")
+            if pacific_avenue < 5:
+                houses = pacific_avenue
+            if pacific_avenue == 5:
+                property = "hotel" 
+            else:
+                property="house"
+            if pennsylvania_avenue < 5:
+                num = pennsylvania_avenue
+                property1 = 'houses'
+            print(f"\nSwap pa {str(num) } {property1} with Pacific Avenue {houses} {property}.")
 
     
     if final == True:
-        print(f'This will cost ${price}.')
+        print(f'\nThis will cost ${price}.')
         print (f'\tPurchase {purchase_hotel[0] + purchase_hotel[1] + purchase_hotel[2]} hotel and {purchase_house[0] + purchase_house[1] + purchase_house[2]} house(s).')
         if purchase_hotel[0]== 1 :
             print("Put 1 hotel on Pacific Avenue and return any houses to the bank.")
@@ -163,12 +216,12 @@ def main():
     if owned.lower() == "y":
 
         pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses, hotels = get_info()
-        purchase_hotel, purchase_house, s_hotel, s_house  = user_choice()
+        purchase_hotel, purchase_house, s_hotel = user_choice()
         price, final,swap = calculations(pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses, hotels, purchase_hotel,
-         purchase_house, s_hotel, s_house )
+         purchase_house, s_hotel)
 
         
-        print_final(price, final, purchase_hotel, purchase_house, s_hotel, s_house, swap, pacific_avenue, north_carolina, pennsylvania_avenue)
+        print_final(price, final, purchase_hotel, purchase_house, s_hotel, swap, pacific_avenue, north_carolina, pennsylvania_avenue)
         
     else: 
         print("You cannot purchase a hotel until you own all the properties of a given color group.")
