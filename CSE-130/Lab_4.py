@@ -260,8 +260,8 @@ def print_final(price, final, purchase_hotel, purchase_house, s_hotel, swap, pac
 
 def main():
 
-    owned = input("Do you own pacific_avenue, north_carolina, pennsylvania_avenue? Y/N")
-    if owned.lower() == "y":
+    owned = input("Do you own pacific_avenue, north_carolina, pennsylvania_avenue? Y/N")# returns if the user owns all green
+    if owned.lower() == "y":# can only purchase if popertys are all owned
 
         pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses, hotels = get_info()
         purchase_hotel, purchase_house, s_hotel = user_choice(pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses, hotels)
