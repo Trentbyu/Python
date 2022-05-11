@@ -3,11 +3,11 @@
 #      Trent Black
 # 2. Assignment Name:
 #      Lab 02: Authentication
-# 3. Assignment Description:
-#     this program decideds if a user is authenticated 
-#     by telling the user if their password and user name 
-#     is correct or if it is wrong. in a json file there are a list of passwords
-#       and usernames that will get authentication if use.
+# # 3. Assignment Description:
+#This program decideds if a user is authenticated 
+#By telling the user if their password and user name 
+#Is correct or if it is wrong. in a json file there are a list of passwords
+#And usernames that will get authentication if use.
 # 4. What was the hardest part? Be as specific as possible.
 '''
 1.Was the syntax of Python the hardest part? If so, what part?
@@ -36,7 +36,7 @@
 import json
 
 # Opening JSON file
-f = open('CSE-130/doc_lab2.json')
+f = open('Lab02.json')
  
 # returns JSON object as
 # a dictionary
@@ -46,7 +46,7 @@ data = json.load(f)
 f.close()
 
 def get_user_info():
-    user_name = input("Username: ")
+    user_name = input("\nUsername: ")
     pass_word = input("Password: ")
 
     return user_name, pass_word
@@ -68,7 +68,7 @@ def check_info(user_name, pass_word):
 
     for x in range(len(user_name_list)):
         if user_name == user_name_list[x] and pass_word == pass_word_list[x]: #checks if the password and username has the same index in their lists
-            print("You are authenticated!")
+            print("You are authenticated!\n")
             authenticated = True
             
     return authenticated
@@ -76,7 +76,7 @@ def check_info(user_name, pass_word):
 
 def vaild(authenticated): #if the user is not authenticated the computer responds 
     if authenticated == False: 
-        print("You are not authorized to use the system.")
+        print("You are not authorized to use the system.\n")
 
 
 def main(): #main function

@@ -44,12 +44,17 @@ def search_sorted_2(data, target):
 # This code will analyze the the 2 sorting functions for different values of "n" (size of the data)
 print("{:>15}{:>15}{:>15}{:>15}{:>15}".format("n","sort1-count","sort2-count","sort1-time","sort2-time"))
 print("{:>15}{:>15}{:>15}{:>15}{:>15}".format("-"*10,"-"*10,"-"*10,"-"*10,"-"*10))
+target = 2
+
+
 for n in range(0,10001,100):
-    test_data = [x for x in range(n)]
+    test_data = [x*2 for x in range(target)]
     count1 = search_sorted_1(test_data, n)
     count2 = search_sorted_2(test_data, n)
     time1 = timeit.timeit("search_sorted_1(test_data, n)", number=100, globals=globals()) / 100 * 1000
     time2 = timeit.timeit("search_sorted_2(test_data, n)", number=100, globals=globals()) / 100 * 1000
     print("{:>15}{:>15}{:>15}{:>15.5f}{:>15.5f}".format(n, count1, count2, time1, time2))
+    
+
        
 
