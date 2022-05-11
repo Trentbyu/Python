@@ -4,14 +4,14 @@
 # 2. Assignment Name:
 #      Lab 04: Monopoly
 # 3. Assignment Description:
-#      -describe what this program is meant to do-
+#      -to orm the user if he or she is able to build a hotel on Pennsylvania Avenue
 # 4. What was the hardest part? Be as specific as possible.
-#      Was it the syntax of Python?
-#      Was it an aspect of the problem you are to solve?
-#      Was it the instructions or any part of the problem definition?
-#      Was it the submission process?
+#      Was it the syntax of Python? yes it can be hard to remember the syntax 
+#      Was it an aspect of the problem you are to solve? yes all the if else statemnets were hard to keep track of i wasnt sure if there was a better way to do it 
+#      Was it the instructions or any part of the problem definition? the instructions were not clear on the testcases i wasnt sure what the test cases wanted me to do
+#      Was it the submission process? the submission was ok
 # 5. How long did it take for you to complete the assignment?
-#      -total time in hours including reading the assignment and submitting the program-
+#      -5 hours 
 
 
 
@@ -31,7 +31,7 @@ def get_info():
     return pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses, hotels
 
 
-def user_choice(pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses, hotels):
+def user_choice(pacific_avenue, north_carolina, pennsylvania_avenue):
     '''
     this askes the user what they want to do
     they can purchase a hotel or houses
@@ -159,7 +159,7 @@ def calculations(pacific_avenue, north_carolina, pennsylvania_avenue, cash, hous
     return price , final, swap #final is if there was an error or not 
 
 
-def print_final(price, final, purchase_hotel, purchase_house, s_hotel, swap, pacific_avenue, north_carolina, pennsylvania_avenue,):
+def print_final(price, final, purchase_hotel, purchase_house, swap, pacific_avenue, north_carolina, pennsylvania_avenue,):
     '''
     this functiuon prints out all the different cases 
     can not print out if there is an error in the calculations throws one 
@@ -264,12 +264,12 @@ def main():
     if owned.lower() == "y":# can only purchase if popertys are all owned
 
         pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses, hotels = get_info()
-        purchase_hotel, purchase_house, s_hotel = user_choice(pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses, hotels)
+        purchase_hotel, purchase_house, s_hotel = user_choice(pacific_avenue, north_carolina, pennsylvania_avenue)
         price, final,swap = calculations(pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses, hotels, purchase_hotel,
          purchase_house, s_hotel)
 
         
-        print_final(price, final, purchase_hotel, purchase_house, s_hotel, swap, pacific_avenue, north_carolina, pennsylvania_avenue)
+        print_final(price, final, purchase_hotel, purchase_house, swap, pacific_avenue, north_carolina, pennsylvania_avenue)
         
     else: 
         print("You cannot purchase a hotel until you own all the properties of a given color group.")
