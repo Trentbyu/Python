@@ -1,15 +1,17 @@
 
 # 1. Name:
-#      -your name-
+#      Trent Black
 # 2. Assignment Name:
 #      Lab 04: Monopoly
 # 3. Assignment Description:
-#      -to orm the user if he or she is able to build a hotel on Pennsylvania Avenue
+#      -to inform the user if he or she is able to build a hotel or house on a green property or to swap with another green property 
 # 4. What was the hardest part? Be as specific as possible.
 #      Was it the syntax of Python? yes it can be hard to remember the syntax 
 #      Was it an aspect of the problem you are to solve? yes all the if else statemnets were hard to keep track of i wasnt sure if there was a better way to do it 
 #      Was it the instructions or any part of the problem definition? the instructions were not clear on the testcases i wasnt sure what the test cases wanted me to do
 #      Was it the submission process? the submission was ok
+#      i struggled the most on knowing what to do i did not understand the test cases very well so i tried to debugg as much as possible 
+#      there was alot of times i feel i added more than was required becuase i wanted to get a good grade but was unsure if it was needed
 # 5. How long did it take for you to complete the assignment?
 #      -5 hours 
 
@@ -43,45 +45,44 @@ def user_choice(pacific_avenue, north_carolina, pennsylvania_avenue):
     
     purchase_house = input("do you want to purhcase a house? y/n")
     if purchase_house.lower() == "y":
-        if pacific_avenue <4:
-            purchase_house_pc = int(input("do you want to purchase a house on pc type 1-4? if no type 0. "))
-        else:
-            purchase_house_pc =0
-        if north_carolina <4:
-            purchase_house_nc = int(input("do you want to purchase a house on nc type 1-4? if no type 0. "))
-        else:
-            purchase_house_nc = 0
-        if pennsylvania_avenue <4:
-            purchase_house_pa = int(input("do you want to purchase a house on pa type 1-4? if no type 0. "))
-        else:
+       
+        purchase_house_pc = int(input("do you want to purchase a house on pc type 1-4? if no type 0. "))
+    
+        purchase_house_nc = int(input("do you want to purchase a house on nc type 1-4? if no type 0. "))
+       
+        purchase_house_pa = int(input("do you want to purchase a house on pa type 1-4? if no type 0. "))
+     
+        if purchase_house_pc + pacific_avenue >= 5 or purchase_house_nc + north_carolina >= 5 or purchase_house_pa + pennsylvania_avenue >= 5:
+            print("already built too many houses")
+        if purchase_house_pc + pacific_avenue >= 5:
+            purchase_house_pc = 0
+        if purchase_house_nc + north_carolina >= 5:
+            purchase_house_nc =  0
+        if purchase_house_pa + pennsylvania_avenue >= 5:
             purchase_house_pa = 0
+            
+
         purchase_house = [purchase_house_pc, purchase_house_nc, purchase_house_pa]  
     else:
-        purchase_house = [0,0,0] 
+        purchase_house = [0,0,0] # if they dont want to purchase a house than the vaules are 0
     
     purchase_hotel = input("do you want to purhcase a hotel? y/n")
     if purchase_hotel.lower() == "y":
-        if pacific_avenue == 4 or purchase_house[0] + pacific_avenue ==4:
-            purchase_hotel_pc = int(input("do you want to purchase a hotel on pc type 1? if no type 0. "))
-        else:
-            purchase_hotel_pc =0 
-        if north_carolina ==4 or purchase_house[1] + north_carolina==4:
-            purchase_hotel_nc = int(input("do you want to purchase a hotel on nc type 1? if no type 0. "))
-        else:
-            purchase_hotel_nc =0 
-        if pennsylvania_avenue ==4 or purchase_house[2] + pennsylvania_avenue ==4:
-            purchase_hotel_pa = int(input("do you want to purchase a hotel on pa type 1? if no type 0. "))
-        else:
-            purchase_hotel_pa =0  
+        
+        purchase_hotel_pc = int(input("do you want to purchase a hotel on pc type 1? if no type 0. "))
+        purchase_hotel_nc = int(input("do you want to purchase a hotel on nc type 1? if no type 0. "))
+        purchase_hotel_pa = int(input("do you want to purchase a hotel on pa type 1? if no type 0. "))
+        
         purchase_hotel = [purchase_hotel_pc, purchase_hotel_nc, purchase_hotel_pa]        
     else:
-        purchase_hotel = [0,0,0]
+        purchase_hotel = [0,0,0]# if they dont want to purchase a hotel than the vaules are 0
 
-    if purchase_house == [0,0,0] and purchase_hotel == [0,0,0]:
-        swap_hotel = input("do you want to swap a hotels or houses from a property? y/n ")
+    # can only swap if they dont want to buy a house or hotel
+    if purchase_house == [0, 0, 0] and purchase_hotel == [0, 0, 0]:
+        swap_hotel = input("do you want to swap a hotels or houses from a property? y/n: ")
         if swap_hotel.lower() == "y":
-            s_h = input("swap pc? nc? or pa?")
-            s_h2 = input(f'swap {s_h} with pc? nc? or pa?')
+            s_h = input("swap pc? nc? or pa?: ")
+            s_h2 = input(f'swap {s_h} with pc? nc? or pa?: ')
             s_hotel = [s_h, s_h2] 
         else:
             s_hotel = [' ',' ']
@@ -98,8 +99,6 @@ def calculations(pacific_avenue, north_carolina, pennsylvania_avenue, cash, hous
     calculations does the work to set up a property swap
     calculations makes sure the user can not add houses more than can fit on a property
     '''
-
-
     price = 0
     final = True
     swap = ' '
@@ -163,7 +162,12 @@ def calculations(pacific_avenue, north_carolina, pennsylvania_avenue, cash, hous
     if pacific_avenue >=6 or purchase_house[0] >= 6 or north_carolina >=6 or purchase_house[1] >= 6 or pennsylvania_avenue >=6 or purchase_house[2] >= 6 :
         print("no more room for hosues or hotels on this property ")
         final = False
-
+    if pacific_avenue + purchase_house[0] < 4 and purchase_hotel[0] == 1 or north_carolina + purchase_house[1] < 4 and purchase_hotel[1] == 1 or pennsylvania_avenue + purchase_house[2] < 4 and purchase_hotel[2] == 1:
+        print("You do not have enough houses to build here ")
+        final = False
+    if pacific_avenue == 5 and purchase_hotel[0] >= 1 or north_carolina == 5 and purchase_hotel[1] >= 1 or pennsylvania_avenue == 5 and purchase_hotel[2] >= 1:
+        print("There is already a hotel there.")
+        final = False
     
     return price , final, swap #final is if there was an error or not 
 
@@ -211,7 +215,7 @@ def print_final(price, final, purchase_hotel, purchase_house, swap, pacific_aven
             if north_carolina < 5:
                 num = north_carolina
                 property1 = 'houses'
-            print(f"\nSwap North Carolina {str(num)} {property1 } with Pennsylvania avenu {houses}{property}.")
+            print(f"\nSwap North Carolina {str(num)} {property1 } with Pennsylvania avenu {houses} {property}.")
         if swap == "ncpc":
             if pacific_avenue < 5:
                 houses = pacific_avenue
@@ -252,7 +256,7 @@ def print_final(price, final, purchase_hotel, purchase_house, swap, pacific_aven
 
 
         print(f'\nThis will cost ${price}.')
-        print (f'\tPurchase {purchase_hotel[0] + purchase_hotel[1] + purchase_hotel[2]} hotel and {purchase_house[0] + purchase_house[1] + purchase_house[2]} house(s).')
+        print (f'\tPurchase {purchase_hotel[0] + purchase_hotel[1] + purchase_hotel[2]} hotel(s) and {purchase_house[0] + purchase_house[1] + purchase_house[2]} house(s).')
         if purchase_hotel[0]== 1 :
             print("Put 1 hotel on Pacific Avenue and return any houses to the bank.")
         if purchase_hotel[1]== 1 :
@@ -269,7 +273,7 @@ def print_final(price, final, purchase_hotel, purchase_house, swap, pacific_aven
 
 def main():
 
-    owned = input("Do you own pacific_avenue, north_carolina, pennsylvania_avenue? Y/N")# returns if the user owns all green
+    owned = input("Do you own pacific avenue, north carolina, and pennsylvania avenue? Y/N: ")# returns if the user owns all green
     if owned.lower() == "y":# can only purchase if popertys are all owned
 
         pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses, hotels = get_info()
@@ -282,9 +286,6 @@ def main():
         
     else: 
         print("You cannot purchase a hotel until you own all the properties of a given color group.")
-
-
-
 
 
 
