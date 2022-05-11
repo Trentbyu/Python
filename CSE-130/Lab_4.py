@@ -43,9 +43,18 @@ def user_choice(pacific_avenue, north_carolina, pennsylvania_avenue):
     
     purchase_house = input("do you want to purhcase a house? y/n")
     if purchase_house.lower() == "y":
-        purchase_house_pc = int(input("do you want to purchase a house on pc type 1-4? if no type 0. "))
-        purchase_house_nc = int(input("do you want to purchase a house on nc type 1-4? if no type 0. "))
-        purchase_house_pa = int(input("do you want to purchase a house on pa type 1-4? if no type 0. "))
+        if pacific_avenue <4:
+            purchase_house_pc = int(input("do you want to purchase a house on pc type 1-4? if no type 0. "))
+        else:
+            purchase_house_pc =0
+        if north_carolina <4:
+            purchase_house_nc = int(input("do you want to purchase a house on nc type 1-4? if no type 0. "))
+        else:
+            purchase_house_nc = 0
+        if pennsylvania_avenue <4:
+            purchase_house_pa = int(input("do you want to purchase a house on pa type 1-4? if no type 0. "))
+        else:
+            purchase_house_pa = 0
         purchase_house = [purchase_house_pc, purchase_house_nc, purchase_house_pa]  
     else:
         purchase_house = [0,0,0] 
