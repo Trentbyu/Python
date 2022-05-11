@@ -47,13 +47,14 @@ def user_choice():
     else:
         purchase_house = [0,0,0] 
 
+    
     swap_hotel = input("do you want to swap a hotel? y/n ")
     if swap_hotel.lower() == "y":
         s_h = input("swap pc? nc? or pa?")
-        s_h2 = input(f'swap {s_hl} with pc? nc? or pa?')
+        s_h2 = input(f'swap {s_h} with pc? nc? or pa?')
         s_hotel = [s_h, s_h2] 
     else:
-        s_hotel = []
+        s_hotel = [' ',' ']
 
     swap_house = input("do you want to swap a house? y/n ")
     if swap_house.lower() == "y":
@@ -61,14 +62,51 @@ def user_choice():
         s_hl2 = input(f'swap {s_hl} with pc? nc? or pa?')
         s_house = [s_hl, s_hl2]
     else:
-        s_house = [] 
+        s_house = [' ', ' '] 
     return purchase_hotel, purchase_house, s_hotel, s_house 
 
 def calculations(pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses,
- hotels, purchase_hotel, purchase_house, swap_hotel, swap_house):
+ hotels, purchase_hotel, purchase_house,  s_hotel, s_house ):
     price = 0
     final = True
+    swap = ' '
+
+    if s_hotel[0].lower() == "pc":
+        temp = pacific_avenue
+        if s_hotel[1] == "nc":
+            pacific_avenue = north_carolina
+            north_carolina = temp
+            swap = 'pcnc'
+        if s_hotel[1] == "pa":
+            pacific_avenue= pennsylvania_avenue
+            pennsylvania_avenue = temp
+            swap = 'pcpa'
     
+
+    if s_hotel[0].lower() == "nc":
+        temp = north_carolina
+        if s_hotel[1] == "pc":
+            north_carolina = pacific_avenue
+            pacific_avenue = temp
+            swap = 'ncpc'
+
+        if s_hotel[1] == "pa":
+            north_carolina = pennsylvania_avenue
+            pennsylvania_avenue = temp
+            swap = 'ncpa'
+
+    if s_hotel[1].lower() == "pa":
+        temp = pennsylvania_avenue
+        if s_hotel[1] == "pc":
+            pacific_avenue = pacific_avenue
+            pacific_avenue = temp
+            swap = 'papc'
+
+        if s_hotel[1] == "nc":
+            pacific_avenue = north_carolina
+            north_carolina = temp
+            swap = 'panc'
+
     for x in range(0,3):
         price += purchase_hotel[x] * 200
         price += purchase_house[x] * 200
@@ -89,12 +127,25 @@ def calculations(pacific_avenue, north_carolina, pennsylvania_avenue, cash, hous
     
 
     
-    return price , final
+    return price , final, swap
 
 
-def print_final(price, final, purchase_hotel, purchase_house):
+def print_final(price, final, purchase_hotel, purchase_house, s_hotel, s_house, swap, pacific_avenue, north_carolina, pennsylvania_avenue,):
     
-   
+    if swap != ' ':
+        if swap == 'pcnc':
+            print("Swap pc hotel with nc 4 houses.")
+        if swap == 'pcpa':
+            print("swap pc with pa")
+        if swap == 'ncpa':
+            print("swap nc with pa")
+        if swap == "ncpc":
+            print("swap nc with pa")
+        if swap == "panc":
+            print("sawp pa with nc")
+        if swap == "papc":
+            print("swap pa with pc")
+
     
     if final == True:
         print(f'This will cost ${price}.')
@@ -112,12 +163,12 @@ def main():
     if owned.lower() == "y":
 
         pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses, hotels = get_info()
-        purchase_hotel, purchase_house, swap_hotel, swap_house = user_choice()
-        price, final = calculations(pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses, hotels, purchase_hotel,
-         purchase_house, swap_hotel, swap_house)
+        purchase_hotel, purchase_house, s_hotel, s_house  = user_choice()
+        price, final,swap = calculations(pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses, hotels, purchase_hotel,
+         purchase_house, s_hotel, s_house )
 
         
-        print_final(price, final, purchase_hotel, purchase_house)
+        print_final(price, final, purchase_hotel, purchase_house, s_hotel, s_house, swap, pacific_avenue, north_carolina, pennsylvania_avenue)
         
     else: 
         print("You cannot purchase a hotel until you own all the properties of a given color group.")
