@@ -118,7 +118,9 @@ def calculations(pacific_avenue, north_carolina, pennsylvania_avenue, cash, hous
     if pacific_avenue ==5 and purchase_hotel[0] == 1 or north_carolina ==5 and purchase_hotel[1] == 1 or pennsylvania_avenue ==5 and purchase_hotel[2] == 1 :
         print("You cannot purchase a hotel if the property already has one.")
         final = False
-    
+    if pacific_avenue ==5 and purchase_house[0] >= 1 or north_carolina ==5 and purchase_house[1] >= 1 or pennsylvania_avenue ==5 and purchase_house[2] >= 1 :
+        print("You cannot put a house on a hotel.")
+        final = False
 
     
     return price , final, swap
@@ -201,6 +203,8 @@ def print_final(price, final, purchase_hotel, purchase_house, s_hotel, swap, pac
 
     
     if final == True:
+
+
         print(f'\nThis will cost ${price}.')
         print (f'\tPurchase {purchase_hotel[0] + purchase_hotel[1] + purchase_hotel[2]} hotel and {purchase_house[0] + purchase_house[1] + purchase_house[2]} house(s).')
         if purchase_hotel[0]== 1 :
@@ -209,6 +213,13 @@ def print_final(price, final, purchase_hotel, purchase_house, s_hotel, swap, pac
             print("Put 1 hotel on Norh carloina and return any houses to the bank.")
         if purchase_hotel[2]== 1 :
             print("Put 1 hotel on Pennsylvania avenu and return any houses to the bank.")
+        if purchase_house[0] < 5 and purchase_house[0] != 0:
+            print(f"Put {purchase_house[0]} house(s) on Pacific Avenue.")
+        if purchase_house[1] < 5 and purchase_house[1] != 0:
+            print(f"Put {purchase_house[1]} house(s) on North Carolina.")
+        if purchase_house[2] < 5 and purchase_house[2] != 0:
+            print(f"Put {purchase_house[2]} house(s) on Pennsylvania avenu.")
+        
 
 def main():
 
