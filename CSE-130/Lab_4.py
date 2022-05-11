@@ -17,7 +17,10 @@
 
 
 def get_info():
-    
+    '''
+    This function askes the user what is on the propertys
+    asks how many house and hotels are avilble to purchase
+    '''
     pacific_avenue = int(input("what is on  Pacific Avenue? (0:nothing, 1:one house, ... 5:a hotel) "))
     north_carolina = int(input("what is on  North Carolina? (0:nothing, 1:one house, ... 5:a hotel) "))
     pennsylvania_avenue = int(input("what is on  Pennsylvania avenu? (0:nothing, 1:one house, ... 5:a hotel) "))
@@ -28,15 +31,15 @@ def get_info():
     return pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses, hotels
 
 
-def user_choice():
-    purchase_hotel = input("do you want to purhcase a hotel? y/n")
-    if purchase_hotel.lower() == "y":
-        purchase_hotel_pc = int(input("do you want to purchase a hotel on pc type 1? if no type 0. "))
-        purchase_hotel_nc = int(input("do you want to purchase a hotel on nc type 1? if no type 0. "))
-        purchase_hotel_pa = int(input("do you want to purchase a hotel on pa type 1? if no type 0. "))  
-        purchase_hotel = [purchase_hotel_pc, purchase_hotel_nc, purchase_hotel_pa]        
-    else:
-        purchase_hotel = [0,0,0]
+def user_choice(pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses, hotels):
+    '''
+    this askes the user what they want to do
+    they can purchase a hotel or houses
+    if they purchase a hotel they can not swap propertys
+    they can purchase 1-4 houses and 1 hotel
+    '''
+    
+  
     
     purchase_house = input("do you want to purhcase a house? y/n")
     if purchase_house.lower() == "y":
@@ -46,21 +49,48 @@ def user_choice():
         purchase_house = [purchase_house_pc, purchase_house_nc, purchase_house_pa]  
     else:
         purchase_house = [0,0,0] 
-
     
-    swap_hotel = input("do you want to swap a hotel? y/n ")
-    if swap_hotel.lower() == "y":
-        s_h = input("swap pc? nc? or pa?")
-        s_h2 = input(f'swap {s_h} with pc? nc? or pa?')
-        s_hotel = [s_h, s_h2] 
+    purchase_hotel = input("do you want to purhcase a hotel? y/n")
+    if purchase_hotel.lower() == "y":
+        if pacific_avenue == 4 or purchase_house[0] + pacific_avenue ==4:
+            purchase_hotel_pc = int(input("do you want to purchase a hotel on pc type 1? if no type 0. "))
+        else:
+            purchase_hotel_pc =0 
+        if north_carolina ==4 or purchase_house[1] + north_carolina==4:
+            purchase_hotel_nc = int(input("do you want to purchase a hotel on nc type 1? if no type 0. "))
+        else:
+            purchase_hotel_nc =0 
+        if pennsylvania_avenue ==4 or purchase_house[2] + pennsylvania_avenue ==4:
+            purchase_hotel_pa = int(input("do you want to purchase a hotel on pa type 1? if no type 0. "))
+        else:
+            purchase_hotel_pa =0  
+        purchase_hotel = [purchase_hotel_pc, purchase_hotel_nc, purchase_hotel_pa]        
     else:
-        s_hotel = [' ',' ']
+        purchase_hotel = [0,0,0]
 
- 
+    if purchase_house == [0,0,0] and purchase_hotel == [0,0,0]:
+        swap_hotel = input("do you want to swap a hotels or houses from a property? y/n ")
+        if swap_hotel.lower() == "y":
+            s_h = input("swap pc? nc? or pa?")
+            s_h2 = input(f'swap {s_h} with pc? nc? or pa?')
+            s_hotel = [s_h, s_h2] 
+        else:
+            s_hotel = [' ',' ']
+    else:
+         s_hotel = [' ',' ']
+    
     return purchase_hotel, purchase_house, s_hotel
 
 def calculations(pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses,
  hotels, purchase_hotel, purchase_house,  s_hotel ):
+    '''
+    the user is not allowed to purchase a hotel if they already have one on their property
+    calculations adds up the houses and hotels to decided what the price is 
+    calculations does the work to set up a property swap
+    calculations makes sure the user can not add houses more than can fit on a property
+    '''
+
+
     price = 0
     final = True
     swap = ' '
@@ -109,10 +139,10 @@ def calculations(pacific_avenue, north_carolina, pennsylvania_avenue, cash, hous
     if price > cash: 
         print("You do not have sufficient funds to purchase a hotel at this time.")
         final = False
-    if hotels < 1 or hotels < purchase_hotel[0] + purchase_hotel[1] + purchase_hotel[2]: 
+    if  hotels < purchase_hotel[0] + purchase_hotel[1] + purchase_hotel[2]: 
         print("There are not enough hotels available for purchase at this time.")
         final = False
-    if houses < 1 or  houses < purchase_house[0] + purchase_house[1] + purchase_house[2]: 
+    if houses < purchase_house[0] + purchase_house[1] + purchase_house[2]: 
         print("There are not enough houses available for purchase at this time.")
         final = False
     if pacific_avenue ==5 and purchase_hotel[0] == 1 or north_carolina ==5 and purchase_hotel[1] == 1 or pennsylvania_avenue ==5 and purchase_hotel[2] == 1 :
@@ -121,26 +151,33 @@ def calculations(pacific_avenue, north_carolina, pennsylvania_avenue, cash, hous
     if pacific_avenue ==5 and purchase_house[0] >= 1 or north_carolina ==5 and purchase_house[1] >= 1 or pennsylvania_avenue ==5 and purchase_house[2] >= 1 :
         print("You cannot put a house on a hotel.")
         final = False
+    if pacific_avenue >=6 or purchase_house[0] >= 6 or north_carolina >=6 or purchase_house[1] >= 6 or pennsylvania_avenue >=6 or purchase_house[2] >= 6 :
+        print("no more room for hosues or hotels on this property ")
+        final = False
 
     
-    return price , final, swap
+    return price , final, swap #final is if there was an error or not 
 
 
 def print_final(price, final, purchase_hotel, purchase_house, s_hotel, swap, pacific_avenue, north_carolina, pennsylvania_avenue,):
-    
+    '''
+    this functiuon prints out all the different cases 
+    can not print out if there is an error in the calculations throws one 
+
+    '''
     houses = ' '
-    property = ''
-    property1 = 'hotel'
+    property = '' #property for the second property to be swaped
+    property1 = 'hotel' # property for the first property to be swaped
     num = ''
     if swap != ' ':
-        if swap == 'pcnc':
-            if north_carolina < 5:
+        if swap == 'pcnc': #this is what property is to be swpaed to what. this was decided in calculations function
+            if north_carolina < 5: #if it is not a hotel
                 houses = north_carolina
-            if north_carolina == 5:
+            if north_carolina == 5: # if it is a hotel
                 property = "hotel" 
             else:
                 property="houses"
-            if pacific_avenue < 5:
+            if pacific_avenue < 5: #if it is not a hotel
                 num = pacific_avenue
                 property1 = 'houses'
             print(f"\nSwap Pacific Avenue {str(num)} {property1 } with North Carolina {houses} {property} .")
@@ -202,7 +239,7 @@ def print_final(price, final, purchase_hotel, purchase_house, s_hotel, swap, pac
             print(f"\nSwap pa {str(num) } {property1} with Pacific Avenue {houses} {property}.")
 
     
-    if final == True:
+    if final == True and price > 0:# true if there are no previous erros 
 
 
         print(f'\nThis will cost ${price}.')
@@ -213,13 +250,13 @@ def print_final(price, final, purchase_hotel, purchase_house, s_hotel, swap, pac
             print("Put 1 hotel on Norh carloina and return any houses to the bank.")
         if purchase_hotel[2]== 1 :
             print("Put 1 hotel on Pennsylvania avenu and return any houses to the bank.")
-        if purchase_house[0] < 5 and purchase_house[0] != 0:
+        if purchase_house[0] < 5 and purchase_house[0] != 0 and purchase_house[0]+pacific_avenue!=5 and purchase_hotel[0] !=1 :
             print(f"Put {purchase_house[0]} house(s) on Pacific Avenue.")
-        if purchase_house[1] < 5 and purchase_house[1] != 0:
+        if purchase_house[1] < 5 and purchase_house[1] != 0 and purchase_house[1]+north_carolina!=5 and purchase_hotel[1] !=1 :
             print(f"Put {purchase_house[1]} house(s) on North Carolina.")
-        if purchase_house[2] < 5 and purchase_house[2] != 0:
+        if purchase_house[2] < 5 and purchase_house[2] != 0 and purchase_house[2]+pennsylvania_avenue != 5 and purchase_hotel[2] !=1:
             print(f"Put {purchase_house[2]} house(s) on Pennsylvania avenu.")
-        
+         
 
 def main():
 
@@ -227,7 +264,7 @@ def main():
     if owned.lower() == "y":
 
         pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses, hotels = get_info()
-        purchase_hotel, purchase_house, s_hotel = user_choice()
+        purchase_hotel, purchase_house, s_hotel = user_choice(pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses, hotels)
         price, final,swap = calculations(pacific_avenue, north_carolina, pennsylvania_avenue, cash, houses, hotels, purchase_hotel,
          purchase_house, s_hotel)
 
