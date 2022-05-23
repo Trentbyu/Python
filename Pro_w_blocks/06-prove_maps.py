@@ -12,59 +12,59 @@ GitHub repository, unshared Google Drive folder) is acceptable.
 # Problem 1 #
 #############
 
-class Translator:
-    """
-    This class provides the capability of a translator.  A
-    Python Dictionary is used to keep track of the mapping 
-    of words from one language to another language.  You should 
-    assume that there is only one translation for every 
-    word (and vice versa).
-    """
+# class Translator:
+#     """
+#     This class provides the capability of a translator.  A
+#     Python Dictionary is used to keep track of the mapping 
+#     of words from one language to another language.  You should 
+#     assume that there is only one translation for every 
+#     word (and vice versa).
+#     """
 
-    def __init__(self):
-        """ 
-        Initialize the Python Dictionary to store word mappings
-        """
-        self.words = dict() 
+#     def __init__(self):
+#         """ 
+#         Initialize the Python Dictionary to store word mappings
+#         """
+#         self.words = dict() 
 
-    def add_word(self, from_word, to_word):
-        """
-        Add the translation from 'from_word' to 'to_word'
-        For example, in a english to german dictionary:
+#     def add_word(self, from_word, to_word):
+#         """
+#         Add the translation from 'from_word' to 'to_word'
+#         For example, in a english to german dictionary:
 
-        my_translator.add_word("book","buch")
-        """
+#         my_translator.add_word("book","buch")
+#         """
        
 
-        self.words[from_word] = to_word
+#         self.words[from_word] = to_word
        
         
         
 
-    def translate(self, from_word):
-        """
-        Translate a word and return the result.  If the word 
-        can not be translated then "???" is returned.  
-        For example, in an english to german dictionary:
+#     def translate(self, from_word):
+#         """
+#         Translate a word and return the result.  If the word 
+#         can not be translated then "???" is returned.  
+#         For example, in an english to german dictionary:
 
-        german_word = my_translator.translate("book")
-        """
-        try:
-            result = self.words[from_word]
-        except:
-            result = "???"
-        return result
+#         german_word = my_translator.translate("book")
+#         """
+#         try:
+#             result = self.words[from_word]
+#         except:
+#             result = "???"
+#         return result
         
 
-# Sample Test Cases (may not be comprehensive) 
-print("\n=========== PROBLEM 1 TESTS ===========")
-english_to_german = Translator()
-english_to_german.add_word("House","Haus")
-english_to_german.add_word("Car","Auto")
-english_to_german.add_word("Plane","Flugzeug")
-print(english_to_german.translate("Car")) # Auto
-print(english_to_german.translate("Plane")) # Flugzeug
-print(english_to_german.translate("Train")) # ???
+# # Sample Test Cases (may not be comprehensive) 
+# print("\n=========== PROBLEM 1 TESTS ===========")
+# english_to_german = Translator()
+# english_to_german.add_word("House","Haus")
+# english_to_german.add_word("Car","Auto")
+# english_to_german.add_word("Plane","Flugzeug")
+# print(english_to_german.translate("Car")) # Auto
+# print(english_to_german.translate("Plane")) # Flugzeug
+# print(english_to_german.translate("Train")) # ???
 
 #############
 # Problem 2 #
@@ -81,10 +81,35 @@ print(english_to_german.translate("Train")) # ???
 #     file.
 #     """
 #     degrees = dict()
+    
+#     degrees["Bachelors"] =0
+#     degrees["11th"] =0
+#     degrees["Masters"] =0
+#     degrees["Some-college"] =0
+#     degrees["9th"] =0
+#     degrees["Assoc-acdm"] =0
+#     degrees["Assoc-voc"] =0
+#     degrees["7th-8th"] =0
+#     degrees["Doctorate"] =0
+#     degrees["Prof-school"] =0
+#     degrees["5th-6th"] =0
+#     degrees["10th"] =0
+#     degrees["1st-4th"] =0
+#     degrees["Preschool"] =0
+#     degrees["12th"] =0
+
+
+
+
+
+
 #     with open(filename) as file_in:
 #         for line in file_in:
 #             fields = line.split(",") 
-
+#             for value in degrees:
+#                 if value in fields[3]:
+#                     degrees[value] +=1
+            
 #             # ADD YOUR CODE HERE
 
 #     return degrees
@@ -121,7 +146,20 @@ print(english_to_german.translate("Train")) # ???
 #     Reminder: You can access a letter by index in a Python string by 
 #     using the [] notation.
 #     """
-#     pass
+#     anagram = dict()
+
+#     word1 = word1.replace(' ', '')
+#     word2 = word2.replace(' ', '')
+#     word1 = ''.join(sorted(word1.lower()))
+#     word2 = ''.join(sorted(word2.lower()))
+
+#     anagram[word1] = word2
+    
+#     if anagram[word1] == anagram.get(word2):
+#         return True
+#     else:
+#         return False
+   
 
 # # Sample Test Cases (may not be comprehensive) 
 # print("\n=========== PROBLEM 3 TESTS ===========")
@@ -136,128 +174,171 @@ print(english_to_german.translate("Train")) # ???
 # print(is_anagram("Eleven plus Two", "Twelve Plus One")) # True
 # print(is_anagram("Eleven plus One", "Twelve Plus One")) # False
 
-# #############
-# # Problem 4 #
-# #############
+#############
+# Problem 4 #
+#############
 
-# class Maze:
-#     """
-#     Defines a maze using a dictionary.  The dictionary is provided by the
-#     user when the Maze object is created.  The dictionary will contain the
-#     following mapping:
+class Maze:
+    """
+    Defines a maze using a dictionary.  The dictionary is provided by the
+    user when the Maze object is created.  The dictionary will contain the
+    following mapping:
 
-#     (x,y) : (left, right, up, down)
+    (x,y) : (left, right, up, down)
 
-#     'x' and 'y' are integers and represents locations in the maze.
-#     'left', 'right', 'up', and 'down' are boolean are represent valid directions
+    'x' and 'y' are integers and represents locations in the maze.
+    'left', 'right', 'up', and 'down' are boolean are represent valid directions
 
-#     If a direction is False, then we can assume there is a wall in that direction.
-#     If a direction is True, then we can proceed.  
+    If a direction is False, then we can assume there is a wall in that direction.
+    If a direction is True, then we can proceed.  
 
-#     If there is a wall, then display "Can't go that way!".  If there is no wall,
-#     then the 'curr_x' and 'curr_y' values should be changed.
-#     """
+    If there is a wall, then display "Can't go that way!".  If there is no wall,
+    then the 'curr_x' and 'curr_y' values should be changed.
+    """
 
-#     def __init__(self, maze_map):
-#         """
-#         Initialize the map.  We assume that (1,1) is a valid location in
-#         the maze.
-#         """
-#         self.maze_map = maze_map
-#         self.curr_x = 1
-#         self.curr_y = 1
+    def __init__(self, maze_map):
+        """
+        Initialize the map.  We assume that (1,1) is a valid location in
+        the maze.
+        """
+        self.maze_map = maze_map
+        self.curr_x = 1
+        self.curr_y = 1
 
-#     def move_left(self):
-#         """
-#         Check to see if you can move left.  If you can, then move.  If you
-#         can't move, then display "Can't go that way!"
-#         """
-#         pass
+    def move_left(self):
+        """
+        Check to see if you can move left.  If you can, then move.  If you
+        can't move, then display "Can't go that way!"
+        """
+        print("left")
+       
+     
+          
+                
+                
+           
+       
+        if self.maze_map[self.curr_x,self.curr_y][0] == True:
+            print(self.maze_map[self.curr_x,self.curr_y][0],"\n")
+            self.curr_x -=1 
+            
+        else:
+            print("error\n")
+                
+        
 
-#     def move_right(self):
-#         """
-#         Check to see if you can move right.  If you can, then move.  If you
-#         can't move, then display "Can't go that way!"
-#         """        
-#         pass
 
-#     def move_up(self):
-#         """
-#         Check to see if you can move up.  If you can, then move.  If you
-#         can't move, then display "Can't go that way!"
-#         """
-#         pass
+    def move_right(self):
+        """
+        Check to see if you can move right.  If you can, then move.  If you
+        can't move, then display "Can't go that way!"
+        """ 
+        print("right")
+        
+        if self.maze_map[self.curr_x,self.curr_y][1] == True:
+            print(self.maze_map[self.curr_x,self.curr_y][1],"\n")
+            self.curr_x +=1 
+            
+        else:
+            print("error\n")
+        
 
-#     def move_down(self):
-#         """
-#         Check to see if you can move down.  If you can, then move.  If you
-#         can't move, then display "Can't go that way!"
-#         """
-#         pass
+
+
+    def move_up(self):
+        """
+        Check to see if you can move up.  If you can, then move.  If you
+        can't move, then display "Can't go that way!"
+        """
+        print("up")
+        
+        if self.maze_map[self.curr_x,self.curr_y][2] == True:
+            print(self.maze_map[self.curr_x,self.curr_y][2],"\n")
+            self.curr_y +=1 
+            
+        else:
+            print("error\n")
+        
+
+    def move_down(self):
+        """
+        Check to see if you can move down.  If you can, then move.  If you
+        can't move, then display "Can't go that way!"
+        """
+        
+        print("down")
+        if self.maze_map[self.curr_x,self.curr_y][3] == True :
+            print(self.maze_map[self.curr_x,self.curr_y][3],"\n")
+            self.curr_y -=1 
+            
+        else:
+            print("error\n")
+        
     
-#     def show_status(self):
-#         print("Current location (x={} , y={})".format(self.curr_x, self.curr_y))
+    def show_status(self):
+        print("Current location (x={} , y={})".format(self.curr_x, self.curr_y))
 
-# # Sample Test Cases (may not be comprehensive) 
-# map =  {(1,1) : (False, True, False, True),
-#         (1,2) : (False, True, True, False),
-#         (1,3) : (False, False, False, False),
-#         (1,4) : (False, True, False, True),
-#         (1,5) : (False, False, True, True),
-#         (1,6) : (False, False, True, False),
-#         (2,1) : (True, False, False, True),
-#         (2,2) : (True, False, True, True),
-#         (2,3) : (False, False, True, True),
-#         (2,4) : (True, True, True, False),
-#         (2,5) : (False, False, False, False),
-#         (2,6) : (False, False, False, False),
-#         (3,1) : (False, False, False, False),
-#         (3,2) : (False, False, False, False),
-#         (3,3) : (False, False, False, False),
-#         (3,4) : (True, True, False, True), 
-#         (3,5) : (False, False, True, True),
-#         (3,6) : (False, False, True, False),
-#         (4,1) : (False, True, False, False),
-#         (4,2) : (False, False, False, False),
-#         (4,3) : (False, True, False, True),
-#         (4,4) : (True, True, True, False),
-#         (4,5) : (False, False, False, False),
-#         (4,6) : (False, False, False, False),
-#         (5,1) : (True, True, False, True),
-#         (5,2) : (False, False, True, True),
-#         (5,3) : (True, True, True, True),
-#         (5,4) : (True, False, True, True),
-#         (5,5) : (False, False, True, True),
-#         (5,6) : (False, True, True, False),
-#         (6,1) : (True, False, False, False),
-#         (6,2) : (False, False, False, False),
-#         (6,3) : (True, False, False, False),
-#         (6,4) : (False, False, False, False),
-#         (6,5) : (False, False, False, False),
-#         (6,6) : (True, False, False, False)}
+# Sample Test Cases (may not be comprehensive) 
+                # left, right, up, down
+map =  {(1,1) : (False, True, False, True),
+        (1,2) : (False, True, True, False),
+        (1,3) : (False, False, False, False),
+        (1,4) : (False, True, False, True),
+        (1,5) : (False, False, True, True),
+        (1,6) : (False, False, True, False),
+        (2,1) : (True, False, False, True),
+        (2,2) : (True, False, True, True),
+        (2,3) : (False, False, True, True),
+        (2,4) : (True, True, True, False),
+        (2,5) : (False, False, False, False),
+        (2,6) : (False, False, False, False),
+        (3,1) : (False, False, False, False),
+        (3,2) : (False, False, False, False),
+        (3,3) : (False, False, False, False),
+        (3,4) : (True, True, False, True), 
+        (3,5) : (False, False, True, True),
+        (3,6) : (False, False, True, False),
+        (4,1) : (False, True, False, False),
+        (4,2) : (False, False, False, False),
+        (4,3) : (False, True, False, True),
+        (4,4) : (True, True, True, False),
+        (4,5) : (False, False, False, False),
+        (4,6) : (False, False, False, False),
+        (5,1) : (True, True, False, True),
+        (5,2) : (False, False, True, True),
+        (5,3) : (True, True, True, True),
+        (5,4) : (True, False, True, True),
+        (5,5) : (False, False, True, True),
+        (5,6) : (False, True, True, False),
+        (6,1) : (True, False, False, False),
+        (6,2) : (False, False, False, False),
+        (6,3) : (True, False, False, False),
+        (6,4) : (False, False, False, False),
+        (6,5) : (False, False, False, False),
+        (6,6) : (True, False, False, False)}
 
-# print("\n=========== PROBLEM 4 TESTS ===========")
-# maze = Maze(map)
-# maze.show_status() # Should be at (1,1)
-# maze.move_up() # Error
-# maze.move_left() # Error
-# maze.move_right() 
-# maze.move_right() # Error
-# maze.move_down()
-# maze.move_down()
-# maze.move_down()
-# maze.move_right()
-# maze.move_right()
-# maze.move_up()
-# maze.move_right()
-# maze.move_down()
-# maze.move_left()
-# maze.move_down() # Error
-# maze.move_right()
-# maze.move_down()
-# maze.move_down()
-# maze.move_right()
-# maze.show_status() # Should be at (6,6)
+print("\n=========== PROBLEM 4 TESTS ===========")
+maze = Maze(map)
+maze.show_status() # Should be at (1,1)
+maze.move_up() # Error
+maze.move_left() # Error
+maze.move_right() 
+maze.move_right() # Error
+maze.move_down()
+maze.move_down()
+maze.move_down()
+maze.move_right()
+maze.move_right()
+maze.move_up()
+maze.move_right()
+maze.move_down()
+maze.move_left()
+maze.move_down() # Error
+maze.move_right()
+maze.move_down()
+maze.move_down()
+maze.move_right()
+maze.show_status() # Should be at (6,6)
 
 # #############
 # # Problem 5 #
