@@ -34,13 +34,8 @@ class Translator:
 
         my_translator.add_word("book","buch")
         """
-       
-
         self.words[from_word] = to_word
        
-        
-        
-
     def translate(self, from_word):
         """
         Translate a word and return the result.  If the word 
@@ -55,7 +50,6 @@ class Translator:
             result = "???"
         return result
         
-
 # Sample Test Cases (may not be comprehensive) 
 print("\n=========== PROBLEM 1 TESTS ===========")
 english_to_german = Translator()
@@ -97,11 +91,6 @@ def summarize_degrees(filename):
     degrees["1st-4th"] =0
     degrees["Preschool"] =0
     degrees["12th"] =0
-
-
-
-
-
 
     with open(filename) as file_in:
         for line in file_in:
@@ -210,53 +199,33 @@ class Maze:
         Check to see if you can move left.  If you can, then move.  If you
         can't move, then display "Can't go that way!"
         """
-   
-      
         if self.maze_map[self.curr_x,self.curr_y][0] == True and self.curr_x -1 != 0:
             self.curr_x -=1 
             
-  
-
-
     def move_right(self):
         """
         Check to see if you can move right.  If you can, then move.  If you
         can't move, then display "Can't go that way!"
         """ 
-       
-        
         if self.maze_map[self.curr_x,self.curr_y][1] == True and self.curr_x +1 != 7:
             self.curr_x +=1 
             
-  
-
-
     def move_up(self):
         """
         Check to see if you can move up.  If you can, then move.  If you
         can't move, then display "Can't go that way!"
         """
-
-        
         if self.maze_map[self.curr_x,self.curr_y][2] == True and self.curr_y -1 != 0:
             self.curr_y -=1 
             
-     
-
     def move_down(self):
         """
         Check to see if you can move down.  If you can, then move.  If you
         can't move, then display "Can't go that way!"
         """
-        
-      
-        
-
         if self.maze_map[self.curr_x,self.curr_y][3] and self.curr_y +1 != 7:
             self.curr_y +=1 
             
-     
-    
     def show_status(self):
         print("Current location (x={} , y={})".format(self.curr_x, self.curr_y))
 
@@ -370,9 +339,3 @@ earthquake_daily_summary()
 # 9km S of Idyllwild, CA - Mag 0.25
 # 14km SW of Searles Valley, CA - Mag 0.36
 # 4km SW of Volcano, Hawaii - Mag 1.99
-
-
-
-
-
-
