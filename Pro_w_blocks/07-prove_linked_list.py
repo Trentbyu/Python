@@ -8,6 +8,11 @@ to post it online.  Storage into a personal and private repository (e.g. private
 GitHub repository, unshared Google Drive folder) is acceptable.
 """
 
+from turtle import pos, position
+
+from requests import head
+
+
 class LinkedList:
     """
     Implement the LinkedList data structure.  The Node class below is an 
@@ -66,7 +71,16 @@ class LinkedList:
         Insert a new node at the back (i.e. the tail) of the 
         linked list.
         """
-        pass
+        
+        temp= LinkedList.Node(value)
+        if self.head==None:
+            self.head=temp
+        else:
+            curr=self.head
+            while curr.next!=None:
+                curr=curr.next
+            curr.next=temp
+            curr.prev = curr
 
     #################
     # End Problem 1 #
@@ -95,7 +109,19 @@ class LinkedList:
         """
         Remove the last node (i.e. the tail) of the linked list.
         """
-        pass
+        try:
+            if self.head==None:
+                raise Exception("Empty Linked List")
+            else:
+                curr=self.head
+                prev=None
+                while curr.next!=None:
+                    prev=curr
+                    curr=curr.next
+                prev.next=curr.next
+                del curr
+        except Exception as e:
+            print(str(e))
 
     #################
     # End Problem 2 #
@@ -133,7 +159,42 @@ class LinkedList:
         """
         Remove the first node that contains 'value'.
         """
-        pass
+
+        
+
+
+         # Store head node
+        temp = self.head
+ 
+        # If head node itself holds the key to be deleted
+        if (temp != None):
+            if (temp.data == value):
+                self.head = temp.next
+                temp = None
+                return
+ 
+        # Search for the key to be deleted, keep track of the
+        # previous node as we need to change 'prev.next'
+        while(temp !=None):
+            if temp.data == value:
+                break
+            prev = temp
+            temp = temp.next
+ 
+        # if key was not present in linked list
+        if(temp == None):
+            return
+ 
+        # Unlink the node from linked list
+        prev.next = temp.next
+ 
+        temp = None
+    
+
+
+   
+       
+       
 
     #################
     # End Problem 3 #
@@ -147,7 +208,12 @@ class LinkedList:
         Searrch for all instances of 'old_value' and replace the value 
         to 'new_value'.
         """
-        pass
+        temp = self.head
+        while(temp !=None):
+            if temp.data == old_value:
+                temp.data = new_value
+          
+            temp = temp.next
 
     #################
     # End Problem 4 #
@@ -169,7 +235,13 @@ class LinkedList:
         """
         Iterate backward through the Linked List
         """
-        yield "???"  # Replace this when you implement your solution
+        curr = self.head  # Start at the begining since this is a forward iteration.
+        while curr is not None:
+            yield curr.data  # Provide (yield) each item to the user
+            curr = curr.next # Go forward in the linked list
+
+       
+       
 
     #################
     # End Problem 5 #
@@ -194,6 +266,7 @@ class LinkedList:
 # Sample Test Cases (may not be comprehensive) 
 print("\n=========== PROBLEM 1 TESTS ===========")
 ll = LinkedList()
+
 ll.insert_tail(1)
 ll.insert_head(2)
 ll.insert_head(2)
