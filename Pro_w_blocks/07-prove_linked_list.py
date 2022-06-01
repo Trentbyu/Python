@@ -8,9 +8,6 @@ to post it online.  Storage into a personal and private repository (e.g. private
 GitHub repository, unshared Google Drive folder) is acceptable.
 """
 
-from turtle import pos, position
-
-from requests import head
 
 
 class LinkedList:
@@ -110,18 +107,18 @@ class LinkedList:
         Remove the last node (i.e. the tail) of the linked list.
         """
         try:
-            if self.head==None:
-                raise Exception("Empty Linked List")
+            if self.head==None: # does nothing if the head node is nothing 
+                pass
             else:
-                curr=self.head
+                curr=self.head #makes the current node = to head
                 prev=None
-                while curr.next!=None:
+                while curr.next!=None: # moves to the next node until it reaches the end
                     prev=curr
                     curr=curr.next
                 prev.next=curr.next
                 del curr
-        except Exception as e:
-            print(str(e))
+        except:
+            pass
 
     #################
     # End Problem 2 #
@@ -240,10 +237,10 @@ class LinkedList:
         current = self.head
         while current != None:
             next = current.next
-            current.next = prev
+            current.next = prev # 
             prev = current
             current = next
-        self.head = prev
+        self.head = prev # makes the end the begining 
 
         curr = self.head  # Start at the begining since this is a forward iteration.
         while curr != None:
