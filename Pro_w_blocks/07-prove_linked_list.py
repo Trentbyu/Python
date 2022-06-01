@@ -56,7 +56,7 @@ class LinkedList:
         if self.head is None:
             self.head = new_node
             self.tail = new_node
-        # If the list is not empty, then only self.head will be
+        # If the list != empty, then only self.head will be
         # affected.
         else:
             new_node.next = self.head # Connect new node to the previous head
@@ -98,7 +98,7 @@ class LinkedList:
             self.tail = None
         # If the list has more than one item in it, then only self.head
         # will be affected.
-        elif self.head is not None:
+        elif self.head != None:
             self.head.next.prev = None  # Disconnect the second node from the first node
             self.head = self.head.next  # Update the head to point to the second node
 
@@ -135,7 +135,7 @@ class LinkedList:
         # Search for the node that matches 'value' by starting at the 
         # head of the list.
         curr = self.head
-        while curr is not None:
+        while curr != None:
             if curr.data == value:
                 # If the location of 'value' is at the end of the list,
                 # then we can call insert_tail to add 'new_value'
@@ -167,22 +167,22 @@ class LinkedList:
         temp = self.head
  
         # If head node itself holds the key to be deleted
-        if (temp != None):
-            if (temp.data == value):
+        if  temp != None :
+            if  temp.data == value :
                 self.head = temp.next
                 temp = None
                 return
  
         # Search for the key to be deleted, keep track of the
         # previous node as we need to change 'prev.next'
-        while(temp !=None):
+        while temp !=None :
             if temp.data == value:
                 break
             prev = temp
             temp = temp.next
  
         # if key was not present in linked list
-        if(temp == None):
+        if temp == None :
             return
  
         # Unlink the node from linked list
@@ -209,7 +209,7 @@ class LinkedList:
         to 'new_value'.
         """
         temp = self.head
-        while(temp !=None):
+        while temp !=None:
             if temp.data == old_value:
                 temp.data = new_value
           
@@ -224,7 +224,7 @@ class LinkedList:
         Iterate foward through the Linked List
         """
         curr = self.head  # Start at the begining since this is a forward iteration.
-        while curr is not None:
+        while curr != None:
             yield curr.data  # Provide (yield) each item to the user
             curr = curr.next # Go forward in the linked list
 
@@ -235,10 +235,22 @@ class LinkedList:
         """
         Iterate backward through the Linked List
         """
+        # initialize variables
+        prev = None
+        current = self.head
+        while current != None:
+            next = current.next
+            current.next = prev
+            prev = current
+            current = next
+        self.head = prev
+
         curr = self.head  # Start at the begining since this is a forward iteration.
-        while curr is not None:
+        while curr != None:
             yield curr.data  # Provide (yield) each item to the user
             curr = curr.next # Go forward in the linked list
+
+        
 
        
        
