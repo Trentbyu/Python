@@ -1,7 +1,3 @@
-from pickle import NONE
-import re
-import random
-
 
 word = "hat"
 
@@ -11,28 +7,23 @@ while True:
     guess=input('Please guess a word: ')
     i = 0
     
-    for letter in guess:
+    for i,letter in enumerate(guess):
         
         
         if letter not in word:
             print('_', end=' ')
         elif letter in word:
 
-            if i == None:
+            
+            try:
+                if word[i] == letter:
+                    print(letter.upper(), end=' ')
+                else:
+                    print(letter.lower(), end=' ')
+            except:
                 print(letter.lower(), end=' ')
-            elif word[i] == letter:
-                print(letter.upper(), end=' ')
-            else:
-                print(letter.lower(), end=' ')
-           
-        i += 1 
-
-
-
-        if i > len(word):
-            i = None
-    
-    
+                
+        
  
     if guess==word: break
 

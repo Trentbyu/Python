@@ -13,6 +13,10 @@ This solution should not be shared with students.
 # Problem 1 #
 #############
 
+from calendar import c
+from numpy import append
+
+
 def sum_squares_recursive(n):
     """
     Using recursion, find the sum of 1^2 + 2^2 + 3^2 + ... + n^2
@@ -21,7 +25,12 @@ def sum_squares_recursive(n):
     to identify a base case (terminating case).  If the value of
     n <= 0, just return 0.   A loop should not be used.
     """
-    pass
+
+    
+    if n == 0:
+        return 0
+    else:
+        return sum_squares_recursive(n-1)+ n*n
 
 # Sample Test Cases (may not be comprehensive) 
 print("\n=========== PROBLEM 1 TESTS ===========")
@@ -49,10 +58,33 @@ def permutations_choose(letters, size, word=""):
     You can assume that the size specified is always valid (between 1 
     and the length of the letters list).
     """
-    pass
+
+    if len(letters) == 0:   # Base Case
+            print(word)  
+
+    else:
+        # Try adding each of the available letters
+        # to the 'word_so_far' and add up all the
+        # resulting permutations.
+
+        for index in range(len(letters)):
+            # Make a copy of the letters to pass to the
+            # the next call to permutations.  We need
+            # to remove the letter we just added before
+            # we call permutations again.
+
+            letters_left = letters[::]
+       
+            del letters_left[index]
+
+            # Add the new letter to the word we have so far
+            permutations_choose(letters_left, size, word + letters[index])
+
 
 # Sample Test Cases (may not be comprehensive) 
 print("\n=========== PROBLEM 2 TESTS ===========")
+
+
 permutations_choose(list("ABCD"),3)
 """
 Expected Result (order may be different):
@@ -157,6 +189,15 @@ def count_ways_to_climb(s, remember = None):
     The last test case is commented out because it will not work
     until the memoization is implemented.
     """
+
+    if remember is None:
+        remember = dict()
+
+
+    if s in remember:
+        return remember[s]
+    
+    
     # Base Cases
     if s == 0:
         return 0
@@ -166,24 +207,27 @@ def count_ways_to_climb(s, remember = None):
         return 2
     elif s == 3:
         return 4
-
-    # Solve using recursion
     else:
-        ways = count_ways_to_climb(s-1) + count_ways_to_climb(s-2) + count_ways_to_climb(s-3)
-        return ways
+        ways = count_ways_to_climb(s-1, remember) + count_ways_to_climb(s-2, remember) + count_ways_to_climb(s-3, remember)
+    
+    
+    remember[s] = ways
+    
+    return remember[s]
+
 
 # Sample Test Cases (may not be comprehensive) 
 print("\n=========== PROBLEM 3 TESTS ===========")
 print(count_ways_to_climb(5))   # 13
 print(count_ways_to_climb(20))  # 121415
 # Uncomment out the test below after implementing memoization.  It won't work without it.
-#print(count_ways_to_climb(100))  # 180396380815100901214157639
+print(count_ways_to_climb(100))  # 180396380815100901214157639
 
 #############
 # Problem 4 #
 #############
 
-def wildcard_binary(pattern):
+def wildcard_binary(string, index):
     """
     A binary string is a string consisting of 
     just 1's and 0's.  For example, 1010111 is 
@@ -201,16 +245,40 @@ def wildcard_binary(pattern):
     some of the Python str functions like find 
     and replace to be useful in solving this problem.
     """
-    pass
+
+    # makes the string into a list
+    string = list(string)
+
+    if index == len(string):
+        print(''.join(string))
+        return
+ 
+    if string[index] == '*':
+ 
+        # replace '*' by '0' and recurse
+        string[index] = '0'
+        wildcard_binary(string, index + 1)
+ 
+        # replace '*' by '1' and recurse
+        string[index] = '1'
+        wildcard_binary(string, index + 1)
+ 
+        
+       
+       
+        string[index] = '*'
+    else:
+        wildcard_binary(string, index + 1)
+
 
 # Sample Test Cases (may not be comprehensive) 
 print("\n=========== PROBLEM 4 TESTS ===========")
-wildcard_binary("110*0*")
+wildcard_binary("110*0*",0)
 # 110000
 # 110001
 # 110100
 # 110101
-wildcard_binary("***")
+wildcard_binary("***", 0)
 # 000   
 # 001   
 # 010
@@ -280,31 +348,107 @@ def is_valid_move(maze, curr_path, x, y):
     # Otherwise, we are good
     return True
 
-def solve_maze(maze, x=0, y=0, curr_path=None):
+
+def solve_maze(maze, x=0, y=0, curr_path=None,step = None):
     """
     Use recursion to print all paths that start at (0,0) and end at the
     'end' square.
     """
+   
+    
+    if step is None:
+        step = 0
+    if not is_end_maze(maze, x, y):
+       
+        if curr_path is None:
+            curr_path = []
 
-    # If this is the first time running the function, then we need
-    # to initialize the curr_path list.
-    if curr_path is None:
-        curr_path = []
+    
+        if maze[y][x] !=0 or maze[y][x] != 2:
+            if is_valid_move(maze, curr_path, x, y+1 ):
+                    if not is_end_maze(maze, x, y):
+                        curr_path.append((x,y+1))
+                        step += 1
+                        solve_maze(maze, x, y+1, curr_path, step)
+                        
 
-    # ADD CODE HERE    
+            
 
+        if maze[y][x] != 0 or maze[y][x] != 2:
+            if is_valid_move(maze, curr_path, x, y-1 ):
+                    if not is_end_maze(maze, x, y):
+                        curr_path.append((x,y-1))
+                        step += 1
+                        solve_maze(maze, x, y-1, curr_path, step)
+                        
+
+        if maze[y][x]!= 0 or maze[y][x] != 2:
+            if is_valid_move(maze, curr_path, x+1, y):
+                if not is_end_maze(maze, x, y):
+                    curr_path.append((x+1,y))
+                    step += 1
+                    solve_maze(maze, x+1, y, curr_path, step)
+                    
+    
+        if maze[y][x] != 0 or maze[y][x] != 2 :
+            if is_valid_move(maze, curr_path, x-1, y ):
+                    if not is_end_maze(maze, x, y):
+                        
+                        curr_path.append((x-1,y))
+                        step += 1
+            
+                        solve_maze(maze, x-1, y, curr_path, step)
+                       
+    else:
+        print(curr_path, "\n")
+        print(x, y, '\n')
+    
+        print(step, '\n')
+
+
+
+        print(y,  maze[y - 1][x], step-1)
+        
+        the_path = [(y,x)]
+        while step != 1:
+            if y > 0 and maze[y - 1][x] == step-1:
+                y, x = y-1, x
+                the_path.append((y, x))
+                step-=1
+            elif x > 0 and maze[y][x - 1] == step-1:
+                y, x = y, x-1
+                the_path.append((y, x))
+                step-=1
+            elif y < len(maze) - 1 and maze[y + 1][x] == step-1:
+                y, x = y+1, x
+                the_path.append((y, x))
+                step-=1
+            elif x < len(maze[y]) - 1 and maze[y][x + 1] == step-1:
+                y, x = y, x+1
+                the_path.append((y, x))
+                step -= 1
+
+        print(the_path)
+        
+
+   
+        
+        
 
 # Sample Test Cases (may not be comprehensive) 
 print("\n=========== PROBLEM 5 TESTS ===========")
 small_maze = [[1,1,1],[1,0,1],[1,1,2]]
 solve_maze(small_maze)
+
+
 """
 Two Solutions (order in each solution should match):
 [(0, 0), (0, 1), (0, 2), (1, 2), (2, 2)]
 [(0, 0), (1, 0), (2, 0), (2, 1), (2, 2)]
 """
 
-big_maze = [[1,0,1,1,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0],
+big_maze = [
+[1,0,1,1,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0],
 [1,1,1,1,0,1,0,0,0,0,1,0,1,1,1,1,1,1,1,1],
 [1,0,0,0,0,1,0,0,0,0,1,0,1,0,0,1,0,1,0,1],
 [1,1,1,1,0,1,1,1,1,0,1,0,1,0,0,1,0,1,0,1],
@@ -324,7 +468,11 @@ big_maze = [[1,0,1,1,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0],
 [0,1,0,0,0,1,0,1,1,1,1,0,1,1,1,0,0,1,1,0],
 [0,1,0,0,0,1,0,0,0,0,0,0,1,0,1,0,0,0,1,0],
 [1,1,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,0,1,2]]
+
+
 solve_maze(big_maze)
+
+
 """
 One Solution (order should match):
 [(0, 0), (0, 1), (0, 2), (0, 3), (1, 3), (2, 3), (3, 3), (3, 4), (3, 5), (3, 6), (2, 6), 
