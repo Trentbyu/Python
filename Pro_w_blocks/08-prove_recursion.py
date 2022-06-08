@@ -348,88 +348,53 @@ def is_valid_move(maze, curr_path, x, y):
     # Otherwise, we are good
     return True
 
-
-def solve_maze(maze, x=0, y=0, curr_path=None,step = None):
+def solve_maze(maze, x=0, y=0, curr_path=None):
     """
     Use recursion to print all paths that start at (0,0) and end at the
     'end' square.
     """
-   
     
-    if step is None:
-        step = 0
+    
     if not is_end_maze(maze, x, y):
        
         if curr_path is None:
-            curr_path = []
+            curr_path = [(x,y)]
 
+    
+   
+    
     
         if maze[y][x] !=0 or maze[y][x] != 2:
             if is_valid_move(maze, curr_path, x, y+1 ):
                     if not is_end_maze(maze, x, y):
                         curr_path.append((x,y+1))
-                        step += 1
-                        solve_maze(maze, x, y+1, curr_path, step)
-                        
-
-            
+                        solve_maze(maze, x, y+1, curr_path)
 
         if maze[y][x] != 0 or maze[y][x] != 2:
             if is_valid_move(maze, curr_path, x, y-1 ):
                     if not is_end_maze(maze, x, y):
                         curr_path.append((x,y-1))
-                        step += 1
-                        solve_maze(maze, x, y-1, curr_path, step)
-                        
+
+                        solve_maze(maze, x, y-1, curr_path)
 
         if maze[y][x]!= 0 or maze[y][x] != 2:
             if is_valid_move(maze, curr_path, x+1, y):
                 if not is_end_maze(maze, x, y):
                     curr_path.append((x+1,y))
-                    step += 1
-                    solve_maze(maze, x+1, y, curr_path, step)
-                    
-    
+
+                    solve_maze(maze, x+1, y, curr_path)
         if maze[y][x] != 0 or maze[y][x] != 2 :
             if is_valid_move(maze, curr_path, x-1, y ):
                     if not is_end_maze(maze, x, y):
                         
                         curr_path.append((x-1,y))
-                        step += 1
+
+                        solve_maze(maze, x-1, y, curr_path)
             
-                        solve_maze(maze, x-1, y, curr_path, step)
-                       
     else:
         print(curr_path, "\n")
-        print(x, y, '\n')
     
-        print(step, '\n')
 
-
-
-        print(y,  maze[y - 1][x], step-1)
-        
-        the_path = [(y,x)]
-        while step != 1:
-            if y > 0 and maze[y - 1][x] == step-1:
-                y, x = y-1, x
-                the_path.append((y, x))
-                step-=1
-            elif x > 0 and maze[y][x - 1] == step-1:
-                y, x = y, x-1
-                the_path.append((y, x))
-                step-=1
-            elif y < len(maze) - 1 and maze[y + 1][x] == step-1:
-                y, x = y+1, x
-                the_path.append((y, x))
-                step-=1
-            elif x < len(maze[y]) - 1 and maze[y][x + 1] == step-1:
-                y, x = y, x+1
-                the_path.append((y, x))
-                step -= 1
-
-        print(the_path)
-        
 
    
         

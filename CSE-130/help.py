@@ -1,15 +1,14 @@
 
-word = "dogs"
-guess = "dpgs"
+word = "commitment"
+my_letter = "m"
 
-for i,l in enumerate(word):
-    
+
+for l in word: 
+
+
+    if l == my_letter:
+        print(l.upper())
+    else:
+        print(l)
 
  
-
-    if word[i] == guess[i]:
-
-        print(guess[i].upper(), end='')
-
-    else:
-        print("_", end='')
