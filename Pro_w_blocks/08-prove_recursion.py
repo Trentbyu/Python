@@ -355,45 +355,48 @@ def solve_maze(maze, x=0, y=0, curr_path=None):
     """
     
     
-    if not is_end_maze(maze, x, y):
        
-        if curr_path is None:
-            curr_path = [(x,y)]
+    if curr_path is None:
+        curr_path = [(x,y)]
 
+
+
+
+
+    if maze[y][x] !=0 or maze[y][x] != 2:
+        if is_valid_move(maze, curr_path, x, y+1 ):
+                if not is_end_maze(maze, x, y):
+                    curr_path.append((x,y+1))
+                    solve_maze(maze, x, y+1, curr_path)
+
+    if maze[y][x] != 0 or maze[y][x] != 2:
+        if is_valid_move(maze, curr_path, x, y-1 ):
+                if not is_end_maze(maze, x, y):
+                    curr_path.append((x,y-1))
+
+                    solve_maze(maze, x, y-1, curr_path)
+
+    if maze[y][x]!= 0 or maze[y][x] != 2:
+        if is_valid_move(maze, curr_path, x+1, y):
+            if not is_end_maze(maze, x, y):
+                curr_path.append((x+1,y))
+
+                solve_maze(maze, x+1, y, curr_path)
+    if maze[y][x] != 0 or maze[y][x] != 2 :
+        if is_valid_move(maze, curr_path, x-1, y ):
+                if not is_end_maze(maze, x, y):
+                    
+                    curr_path.append((x-1,y))
+
+                    solve_maze(maze, x-1, y, curr_path)
+
+
+    if not is_end_maze(maze, x, y):
+        curr_path = []
     
    
     
-    
-        if maze[y][x] !=0 or maze[y][x] != 2:
-            if is_valid_move(maze, curr_path, x, y+1 ):
-                    if not is_end_maze(maze, x, y):
-                        curr_path.append((x,y+1))
-                        solve_maze(maze, x, y+1, curr_path)
 
-        if maze[y][x] != 0 or maze[y][x] != 2:
-            if is_valid_move(maze, curr_path, x, y-1 ):
-                    if not is_end_maze(maze, x, y):
-                        curr_path.append((x,y-1))
-
-                        solve_maze(maze, x, y-1, curr_path)
-
-        if maze[y][x]!= 0 or maze[y][x] != 2:
-            if is_valid_move(maze, curr_path, x+1, y):
-                if not is_end_maze(maze, x, y):
-                    curr_path.append((x+1,y))
-
-                    solve_maze(maze, x+1, y, curr_path)
-        if maze[y][x] != 0 or maze[y][x] != 2 :
-            if is_valid_move(maze, curr_path, x-1, y ):
-                    if not is_end_maze(maze, x, y):
-                        
-                        curr_path.append((x-1,y))
-
-                        solve_maze(maze, x-1, y, curr_path)
-            
-    else:
-        print(curr_path, "\n")
-    
 
 
    
