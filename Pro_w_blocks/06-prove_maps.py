@@ -8,171 +8,160 @@ to post it online.  Storage into a personal and private repository (e.g. private
 GitHub repository, unshared Google Drive folder) is acceptable.
 """
 
-#############
-# Problem 1 #
-#############
+############
+#Problem 1 #
+############
 
-# class Translator:
-#     """
-#     This class provides the capability of a translator.  A
-#     Python Dictionary is used to keep track of the mapping 
-#     of words from one language to another language.  You should 
-#     assume that there is only one translation for every 
-#     word (and vice versa).
-#     """
+class Translator:
+    """
+    This class provides the capability of a translator.  A
+    Python Dictionary is used to keep track of the mapping 
+    of words from one language to another language.  You should 
+    assume that there is only one translation for every 
+    word (and vice versa).
+    """
 
-#     def __init__(self):
-#         """ 
-#         Initialize the Python Dictionary to store word mappings
-#         """
-#         self.words = dict() 
+    def __init__(self):
+        """ 
+        Initialize the Python Dictionary to store word mappings
+        """
+        self.words = dict() 
 
-#     def add_word(self, from_word, to_word):
-#         """
-#         Add the translation from 'from_word' to 'to_word'
-#         For example, in a english to german dictionary:
+    def add_word(self, from_word, to_word):
+        """
+        Add the translation from 'from_word' to 'to_word'
+        For example, in a english to german dictionary:
 
-#         my_translator.add_word("book","buch")
-#         """
+        my_translator.add_word("book","buch")
+        """
+        self.words[from_word] = to_word
        
+    def translate(self, from_word):
+        """
+        Translate a word and return the result.  If the word 
+        can not be translated then "???" is returned.  
+        For example, in an english to german dictionary:
 
-#         self.words[from_word] = to_word
-       
+        german_word = my_translator.translate("book")
+        """
+        try:
+            result = self.words[from_word]
+        except:
+            result = "???"
+        return result
         
-        
+# Sample Test Cases (may not be comprehensive) 
+print("\n=========== PROBLEM 1 TESTS ===========")
+english_to_german = Translator()
+english_to_german.add_word("House","Haus")
+english_to_german.add_word("Car","Auto")
+english_to_german.add_word("Plane","Flugzeug")
+print(english_to_german.translate("Car")) # Auto
+print(english_to_german.translate("Plane")) # Flugzeug
+print(english_to_german.translate("Train")) # ???
 
-#     def translate(self, from_word):
-#         """
-#         Translate a word and return the result.  If the word 
-#         can not be translated then "???" is returned.  
-#         For example, in an english to german dictionary:
+############
+#Problem 2 #
+############
 
-#         german_word = my_translator.translate("book")
-#         """
-#         try:
-#             result = self.words[from_word]
-#         except:
-#             result = "???"
-#         return result
-        
-
-# # Sample Test Cases (may not be comprehensive) 
-# print("\n=========== PROBLEM 1 TESTS ===========")
-# english_to_german = Translator()
-# english_to_german.add_word("House","Haus")
-# english_to_german.add_word("Car","Auto")
-# english_to_german.add_word("Plane","Flugzeug")
-# print(english_to_german.translate("Car")) # Auto
-# print(english_to_german.translate("Plane")) # Flugzeug
-# print(english_to_german.translate("Train")) # ???
-
-#############
-# Problem 2 #
-#############
-
-# def summarize_degrees(filename):
-#     """
-#     Read a census file and summarize the degrees (education)
-#     earned by those contained in the file.  The summary
-#     should be stored in a dictionary where the key is the
-#     degree earned and the value is the number of people that 
-#     have earned that degree.  The degree information is in
-#     the 4th column of the file.  There is no header row in the
-#     file.
-#     """
-#     degrees = dict()
+def summarize_degrees(filename):
+    """
+    Read a census file and summarize the degrees (education)
+    earned by those contained in the file.  The summary
+    should be stored in a dictionary where the key is the
+    degree earned and the value is the number of people that 
+    have earned that degree.  The degree information is in
+    the 4th column of the file.  There is no header row in the
+    file.
+    """
+    degrees = dict()
     
-#     degrees["Bachelors"] =0
-#     degrees["11th"] =0
-#     degrees["Masters"] =0
-#     degrees["Some-college"] =0
-#     degrees["9th"] =0
-#     degrees["Assoc-acdm"] =0
-#     degrees["Assoc-voc"] =0
-#     degrees["7th-8th"] =0
-#     degrees["Doctorate"] =0
-#     degrees["Prof-school"] =0
-#     degrees["5th-6th"] =0
-#     degrees["10th"] =0
-#     degrees["1st-4th"] =0
-#     degrees["Preschool"] =0
-#     degrees["12th"] =0
+    degrees["Bachelors"] =0
+    degrees["11th"] =0
+    degrees["Masters"] =0
+    degrees["Some-college"] =0
+    degrees["9th"] =0
+    degrees["Assoc-acdm"] =0
+    degrees["Assoc-voc"] =0
+    degrees["7th-8th"] =0
+    degrees["Doctorate"] =0
+    degrees["Prof-school"] =0
+    degrees["5th-6th"] =0
+    degrees["10th"] =0
+    degrees["1st-4th"] =0
+    degrees["Preschool"] =0
+    degrees["12th"] =0
 
-
-
-
-
-
-#     with open(filename) as file_in:
-#         for line in file_in:
-#             fields = line.split(",") 
-#             for value in degrees:
-#                 if value in fields[3]:
-#                     degrees[value] +=1
+    with open(filename) as file_in:
+        for line in file_in:
+            fields = line.split(",") 
+            for value in degrees:
+                if value in fields[3]:
+                    degrees[value] +=1
             
-#             # ADD YOUR CODE HERE
+            # ADD YOUR CODE HERE
 
-#     return degrees
+    return degrees
 
-# # Sample Test Cases (may not be comprehensive) 
-# print("\n=========== PROBLEM 2 TESTS ===========")
-# print(summarize_degrees("census.txt")) # You might need to add a path for the file
-# # Results may be in a different order:
-# # {'Bachelors': 5355, 'HS-grad': 10501, '11th': 1175, 
-# # 'Masters': 1723, '9th': 514, 'Some-college': 7291, 
-# # 'Assoc-acdm': 1067, 'Assoc-voc': 1382, '7th-8th': 646, 
-# # 'Doctorate': 413, 'Prof-school': 576, '5th-6th': 333, 
-# # '10th': 933, '1st-4th': 168, 'Preschool': 51, 
-# # '12th': 433}   
+# Sample Test Cases (may not be comprehensive) 
+print("\n=========== PROBLEM 2 TESTS ===========")
+print(summarize_degrees("census.txt")) # You might need to add a path for the file
+# Results may be in a different order:
+# {'Bachelors': 5355, 'HS-grad': 10501, '11th': 1175, 
+# 'Masters': 1723, '9th': 514, 'Some-college': 7291, 
+# 'Assoc-acdm': 1067, 'Assoc-voc': 1382, '7th-8th': 646, 
+# 'Doctorate': 413, 'Prof-school': 576, '5th-6th': 333, 
+# '10th': 933, '1st-4th': 168, 'Preschool': 51, 
+# '12th': 433}   
 
-# #############
-# # Problem 3 #
-# #############
+#############
+# Problem 3 #
+#############
 
-# def is_anagram(word1, word2):
-#     """
-#     Determine if 'word1' and 'word2' are anagrams.  An anagram
-#     is when the same letters in a word are re-organized into a 
-#     new word.  A Python dictionary is used to solve the problem.
+def is_anagram(word1, word2):
+    """
+    Determine if 'word1' and 'word2' are anagrams.  An anagram
+    is when the same letters in a word are re-organized into a 
+    new word.  A Python dictionary is used to solve the problem.
 
-#     Examples:
-#     is_anagram("CAT","ACT") would return True
-#     is_anagram("DOG","GOOD") would return False because GOOD has 2 O's
+    Examples:
+    is_anagram("CAT","ACT") would return True
+    is_anagram("DOG","GOOD") would return False because GOOD has 2 O's
 
-#     Important Note: When determining if two words are anagrams, you
-#     should ignore any spaces.  You should also ignore cases.  For 
-#     example, 'Ab' and 'Ba' should be considered anagrams
+    Important Note: When determining if two words are anagrams, you
+    should ignore any spaces.  You should also ignore cases.  For 
+    example, 'Ab' and 'Ba' should be considered anagrams
 
-#     Reminder: You can access a letter by index in a Python string by 
-#     using the [] notation.
-#     """
-#     anagram = dict()
+    Reminder: You can access a letter by index in a Python string by 
+    using the [] notation.
+    """
+    anagram = dict()
 
-#     word1 = word1.replace(' ', '')
-#     word2 = word2.replace(' ', '')
-#     word1 = ''.join(sorted(word1.lower()))
-#     word2 = ''.join(sorted(word2.lower()))
+    word1 = word1.replace(' ', '')
+    word2 = word2.replace(' ', '')
+    word1 = ''.join(sorted(word1.lower()))
+    word2 = ''.join(sorted(word2.lower()))
 
-#     anagram[word1] = word2
+    anagram[word1] = word2
     
-#     if anagram[word1] == anagram.get(word2):
-#         return True
-#     else:
-#         return False
+    if anagram[word1] == anagram.get(word2):
+        return True
+    else:
+        return False
    
 
-# # Sample Test Cases (may not be comprehensive) 
-# print("\n=========== PROBLEM 3 TESTS ===========")
-# print(is_anagram("CAT","ACT")) # True
-# print(is_anagram("DOG", "GOOD")) # False
-# print(is_anagram("AABBCCDD", "ABCD")) # False
-# print(is_anagram("ABCCD","ABBCD")) # False
-# print(is_anagram("BC","AD")) # False
-# print(is_anagram("Ab","Ba")) # True
-# print(is_anagram("A Decimal Point", "Im a Dot in Place"))  # True
-# print(is_anagram("tom marvolo riddle", "i am lord voldemort")) # True
-# print(is_anagram("Eleven plus Two", "Twelve Plus One")) # True
-# print(is_anagram("Eleven plus One", "Twelve Plus One")) # False
+# Sample Test Cases (may not be comprehensive) 
+print("\n=========== PROBLEM 3 TESTS ===========")
+print(is_anagram("CAT","ACT")) # True
+print(is_anagram("DOG", "GOOD")) # False
+print(is_anagram("AABBCCDD", "ABCD")) # False
+print(is_anagram("ABCCD","ABBCD")) # False
+print(is_anagram("BC","AD")) # False
+print(is_anagram("Ab","Ba")) # True
+print(is_anagram("A Decimal Point", "Im a Dot in Place"))  # True
+print(is_anagram("tom marvolo riddle", "i am lord voldemort")) # True
+print(is_anagram("Eleven plus Two", "Twelve Plus One")) # True
+print(is_anagram("Eleven plus One", "Twelve Plus One")) # False
 
 #############
 # Problem 4 #
@@ -210,71 +199,33 @@ class Maze:
         Check to see if you can move left.  If you can, then move.  If you
         can't move, then display "Can't go that way!"
         """
-        print("left")
-       
-     
-          
-                
-                
-           
-       
-        if self.maze_map[self.curr_x,self.curr_y][0] == True:
-            print(self.maze_map[self.curr_x,self.curr_y][0],"\n")
+        if self.maze_map[self.curr_x,self.curr_y][0] == True and self.curr_x -1 != 0:
             self.curr_x -=1 
             
-        else:
-            print("error\n")
-                
-        
-
-
     def move_right(self):
         """
         Check to see if you can move right.  If you can, then move.  If you
         can't move, then display "Can't go that way!"
         """ 
-        print("right")
-        
-        if self.maze_map[self.curr_x,self.curr_y][1] == True:
-            print(self.maze_map[self.curr_x,self.curr_y][1],"\n")
+        if self.maze_map[self.curr_x,self.curr_y][1] == True and self.curr_x +1 != 7:
             self.curr_x +=1 
             
-        else:
-            print("error\n")
-        
-
-
-
     def move_up(self):
         """
         Check to see if you can move up.  If you can, then move.  If you
         can't move, then display "Can't go that way!"
         """
-        print("up")
-        
-        if self.maze_map[self.curr_x,self.curr_y][2] == True:
-            print(self.maze_map[self.curr_x,self.curr_y][2],"\n")
-            self.curr_y +=1 
+        if self.maze_map[self.curr_x,self.curr_y][2] == True and self.curr_y -1 != 0:
+            self.curr_y -=1 
             
-        else:
-            print("error\n")
-        
-
     def move_down(self):
         """
         Check to see if you can move down.  If you can, then move.  If you
         can't move, then display "Can't go that way!"
         """
-        
-        print("down")
-        if self.maze_map[self.curr_x,self.curr_y][3] == True :
-            print(self.maze_map[self.curr_x,self.curr_y][3],"\n")
-            self.curr_y -=1 
+        if self.maze_map[self.curr_x,self.curr_y][3] and self.curr_y +1 != 7:
+            self.curr_y +=1 
             
-        else:
-            print("error\n")
-        
-    
     def show_status(self):
         print("Current location (x={} , y={})".format(self.curr_x, self.curr_y))
 
@@ -340,51 +291,51 @@ maze.move_down()
 maze.move_right()
 maze.show_status() # Should be at (6,6)
 
-# #############
-# # Problem 5 #
-# #############
+#############
+# Problem 5 #
+#############
 
-# import requests  
+import requests  
 
-# def earthquake_daily_summary():
-#     """
-#     This function will read JSON (Javascrip Object Notation) data from the 
-#     United States Geological Service (USGS) consisting of earthquake data.
-#     The data will include all earthquakes in the current day.
+def earthquake_daily_summary():
+    """
+    This function will read JSON (Javascrip Object Notation) data from the 
+    United States Geological Service (USGS) consisting of earthquake data.
+    The data will include all earthquakes in the current day.
     
-#     JSON data is organized into a dictionary.  After reading the data using
-#     the 'requests' library, this function will print out a list of all
-#     earthquake locations ('place' attribute) and magnitudes ('mag' attribute).
-#     Additional information about the format of the JSON data can be found 
-#     at this website:  
+    JSON data is organized into a dictionary.  After reading the data using
+    the 'requests' library, this function will print out a list of all
+    earthquake locations ('place' attribute) and magnitudes ('mag' attribute).
+    Additional information about the format of the JSON data can be found 
+    at this website:  
 
-#     https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php
+    https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php
         
-#     To install the requests library, run:
-#        If using virtual environment: pip install requests
-#        If using Windows: py -m pip install requests
-#        If using Mac: pip3 install requests
-#     """    
-#     req = requests.get("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson")
-#     data = req.json() # The .json() function will convert the json data from the server to a dictionary
+    To install the requests library, run:
+       If using virtual environment: pip install requests
+       If using Windows: py -m pip install requests
+       If using Mac: pip3 install requests
+    """    
+    req = requests.get("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson")
+    data = req.json() # The .json() function will convert the json data from the server to a dictionary
 
-#     # ADD YOUR CODE HERE
+    # ADD YOUR CODE HERE
 
-# # Sample Test Cases (may not be comprehensive) 
-# print("\n=========== PROBLEM 5 TESTS ===========")
-# earthquake_daily_summary()
+    for x in range(len(data["features"])):
+    
+        print(data["features"][x]['properties']['place'],'-', data["features"][x]['properties']['mag'])
+        
+    
 
-# # Sample output from the function.  Number of earthquakes, places, and magnitudes will vary.
+# Sample Test Cases (may not be comprehensive) 
+print("\n=========== PROBLEM 5 TESTS ===========")
+earthquake_daily_summary()
 
-# # 1km NE of Pahala, Hawaii - Mag 2.36
-# # 58km NW of Kandrian, Papua New Guinea - Mag 4.5
-# # 16km NNW of Truckee, California - Mag 0.7
-# # 9km S of Idyllwild, CA - Mag 0.25
-# # 14km SW of Searles Valley, CA - Mag 0.36
-# # 4km SW of Volcano, Hawaii - Mag 1.99
+# Sample output from the function.  Number of earthquakes, places, and magnitudes will vary.
 
-
-
-
-
-
+# 1km NE of Pahala, Hawaii - Mag 2.36
+# 58km NW of Kandrian, Papua New Guinea - Mag 4.5
+# 16km NNW of Truckee, California - Mag 0.7
+# 9km S of Idyllwild, CA - Mag 0.25
+# 14km SW of Searles Valley, CA - Mag 0.36
+# 4km SW of Volcano, Hawaii - Mag 1.99
