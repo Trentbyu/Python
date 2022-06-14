@@ -91,7 +91,7 @@ def sort(f):
 """
 CSE-130/Lab08.empty.json
 
-CSE-13-/Lab08.trivial.json
+CSE-130/Lab08.trivial.json
 
 CSE-130/Lab08.languages.json
 
