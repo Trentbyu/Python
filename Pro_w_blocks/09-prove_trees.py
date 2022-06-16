@@ -9,6 +9,9 @@ GitHub repository, unshared Google Drive folder) is acceptable.
 """
 
 
+from lib2to3.pytree import Node
+
+
 class BST:
     """
     Implement the Binary Search Tree (BST) data structure.  The Node 
@@ -203,19 +206,16 @@ class BST:
         """
         
    
-            
+        res = []
+        if node:
+            res = self._traverse_backward(node.left)
+            res.append(node.data)
+            res = res + self._traverse_backward(node.right)
 
-        print(node.data)
-        self._traverse_backward(node.right)
-            
-    
-        # then print the data of node
-            
-        print(node.data, end='')
+      
+        return res
 
-        # First recur on left child
-            
-        self._traverse_backward(node.left)
+       
       
                 
            
@@ -253,7 +253,7 @@ class BST:
         get_height.
         """
         if node is None:
-            return 0 ;
+            return 0 
     
         else :
     
@@ -325,9 +325,9 @@ def _insert_middle(sorted_list, first, last, bst):
     length = len(sorted_list)
     if length==0: return None
     if length==1: return bst.Node(sorted_list[0])
-    root = bst.Node(sorted_list[int(length/2)])
-    root.left = _insert_middle(sorted_list[:length/2])
-    root.right = _insert_middle(sorted_list[length/2+1:])
+    root = bst.Node(sorted_list[length//2])
+    root.left = _insert_middle(sorted_list[:length//2], 0, 0, bst)
+    root.right = _insert_middle(sorted_list[length//2+1:],0,0,bst)
     return root
 
 
@@ -360,8 +360,8 @@ print(6 in tree) # True
 print(9 in tree) # False
 
 print("\n=========== PROBLEM 3 TESTS ===========")
-# for x in reversed(tree):
-#     print(x)  # 10, 7, 6, 5, 4, 3, 1
+for x in reversed(tree):
+     print(x)  # 10, 7, 6, 5, 4, 3, 1
 
 print("\n=========== PROBLEM 4 TESTS ===========")
 print(tree.get_height()) # 3
