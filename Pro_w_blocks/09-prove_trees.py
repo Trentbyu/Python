@@ -9,10 +9,6 @@ GitHub repository, unshared Google Drive folder) is acceptable.
 """
 
 
-from numpy import insert
-from pygame import MIDIIN
-
-
 class BST:
     """
     Implement the Binary Search Tree (BST) data structure.  The Node 
@@ -324,33 +320,16 @@ def _insert_middle(sorted_list, first, last, bst):
 
     """
 
-    # if sorted_list == []:
-    #     return None
-    
-    # if first+1 != len(sorted_list) and last > 0:
-    #     mid = int(first + (last - first)/2)
-    # else:
-    #     mid = -1
-    
-   
-
-    # print(first , '--', last)
 
 
+    length = len(sorted_list)
+    if length==0: return None
+    if length==1: return bst.Node(sorted_list[0])
+    root = bst.Node(sorted_list[int(length/2)])
+    root.left = _insert_middle(sorted_list[:length/2])
+    root.right = _insert_middle(sorted_list[length/2+1:])
+    return root
 
-    # if mid+1 <len(sorted_list)+1 and mid-1 > -1:
-        
-    #     bst.insert = (sorted_list[mid]) 
-
-
-    #     _insert_middle(sorted_list, first, last-1, bst)
-
-    # if mid-1 > -1 and mid+1 <len(sorted_list)+1:
-
-    #     _insert_middle(sorted_list, first+1, last, bst)
-
-    # # print(bst)
-    return bst
 
 #################
 # End Problem 5 #
