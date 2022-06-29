@@ -21,7 +21,7 @@ def fib(num):
         
         x = y
         y = ap
-        print(x)
+        
        
    
     
@@ -32,4 +32,4 @@ def fib(num):
 
 
 
-fib(8)
+print(fib(9))
