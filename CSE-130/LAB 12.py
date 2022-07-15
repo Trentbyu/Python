@@ -1,24 +1,49 @@
 
+# 1. Name:
+#      Trent Black
+# 2. Assignment Name:
+#      Lab 13: Prime Numbers
+# 3. Assignment Description:
+#      find all the prime numbers up to the number given by the user
+# 4. What was the hardest part? Be as specific as possible.
+#      This assignment was hard at first i thought i had it with pusedo code but i did not
+#       i was able to use my pusedo code to find primes but i did not stop at the squre root of the number 
+#       so i found out after a while how to do it by using two for loops 
+# 5. How long did it take for you to complete the assignment?
+#     3.25 hr
 
 
-while True:
-    max_number = int(input("enter the number "))
-    if max_number >=2:
-        break
-
-primes = list(range(2,max_number +1))
+import math
+n=9
 
 
-for prime in primes:
-    if prime > max_number **2:
-        break
-    print(primes[len(primes)-1])
-    for mult in range(2,len(primes)):
-        cross = mult * prime
+while n!= 0:
+    n = int(input("this program will find all the prime numbers at or below N. Select that N: "))
 
-        if cross > len(primes):
-            break
-        elif cross in primes:
-            primes.remove(cross)
+    assert n != 2 , "There are no prime numbers below 2 "
 
-print(primes)
+
+
+    assert n != 0 , "0 canot be used no prime numbers  "
+
+
+    assert n != 1 , "1 cannot be used it is not a prime number nor does it have any lower than itself  "
+
+
+    assert n != -1 , "-1 cannot be used it is not a prime number nor does it have any lower than itself  "
+
+
+
+    primes = []
+    for number in range(2, n +1):
+        primes.append(number)
+  
+    for number in range(2, math.ceil((math.sqrt(n)))):
+        for multiple in range(2, (math.ceil(n/number)+1)):
+            value = number * multiple 
+
+
+            if value in primes:
+                primes.remove(value)
+    assert len(primes) >0, "no items in primes "
+    print(f"The prime numbers at or below {n} are: {primes}")
