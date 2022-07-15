@@ -9,7 +9,7 @@ GitHub repository, unshared Google Drive folder) is acceptable.
 """
 
 
-from lib2to3.pytree import Node
+
 
 
 class BST:
