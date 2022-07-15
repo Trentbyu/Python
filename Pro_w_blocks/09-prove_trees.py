@@ -187,6 +187,8 @@ class BST:
             print(value)
 
         """        
+
+        
         return self._traverse_backward(self.root)  # Start at the root
 
     ###################
