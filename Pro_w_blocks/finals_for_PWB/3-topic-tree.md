@@ -1,13 +1,19 @@
 
 
 TREE
-1.	Introduction: a treee or a bst tree is a way of spliting numbers by largest to smallest. Largest go to the right and smallest go to the left. It is a tree beause every node has two branches(children) underneateh them the right is bigger then the one on the left.
-2.	When to use a Tree: When to Use Binary Search Trees. Implementing a binary search tree is useful in any situation where the elements can be compared in a less than / greater than manner
+1.	Introduction: a tree or a bst tree is a way of spliting numbers by largest to smallest. Largest go to the right and smallest go to the left. It is a tree beause every node has two branches(children) underneateh them the right is bigger then the one on the left.
+2.	When to use a Tree:  Implementing a binary search tree is useful in any situation where the elements can be compared in a less than / greater than manner
 3.	 Root Node: root node is the starting node. This is where the first item added to the tree goes. IF a bst tree is created from a list than the item closet to the median of the list becomes the root.
 4.	Parent Node: a parent node is the first nodes off the root node
 5.	child: the child node is the first nodes of the parent nodes.
 6.	Degree of a Node: thios is the Height of the node it could be 
 10.	Sibling: sibling nodes are nodes that are underneat the same node 
+11. speed: For a Graph, the complexity of a Depth First Traversal is O(n + m), where n is the number of nodes, and m is the number of edges.
+Since a Binary Tree is also a Graph, the same applies here. The complexity of each of these Depth-first traversals is O(n+m).
+Since the number of edges that can originate from a node is limited to 2 in the case of a Binary Tree, the maximum number of total edges in a Binary Tree is n-1, where n is the total number of nodes.
+The complexity then becomes O(n + n-1), which is O(n)
+12. The Disadvantages: Shape of the tree depends upon order of insertion and it can be degenerated. Searching takes long time. (When tree is not balanced) 
+13. Advantages: BST is fast in insertion and deletion etc when balanced. Very efficient and its code is easier than link lists.
 
     ![](2022-07-15-13-10-03.png)
 
@@ -16,7 +22,7 @@ TREE
 
 
 
-
+    ```python
         class BST:
             """
             Implement the Binary Search Tree (BST) data structure.  The Node 
@@ -354,7 +360,7 @@ TREE
         print(tree3.get_height()) # 8 .. any higher and its not balanced
         print(tree4.get_height()) # 1
         print(tree5.get_height()) # 0
-
+    ```
 
 
 
@@ -363,7 +369,7 @@ TREE
 
 
 # YOUR TURN
-
+    ```python
             class add :
                 @staticmethod
                 def main( args) :
@@ -414,3 +420,4 @@ TREE
             if __name__=="__main__":
                 add.main([])
 
+    ```

@@ -11,11 +11,12 @@ SET
 9.	Clearing sets clear():  set_name.clear(), The clear() method doesn't take any parameters. The clear() method doesn't return any value. clear() method to remove all the elements of the set so it will then be blank.
 10.	Time complexity of Sets:  O(1) on average. However in worst case it can become O(n).
 11.	Pros and cons: The major advantage of using a set, as opposed to a list, is that it has a highly optimized method for checking whether a specific element is contained in the set.
+12. The top 3 erros of a set: syntax errors. logic errors. runtime errors.
 
 
 
 
-
+    ```python
         def intersection(set1, set2):
             """
             Perform an intersection between 2 sets.  An intersection will contain
@@ -122,7 +123,7 @@ SET
         set = set(["a", "b","c"])
         set.add("d")
 
-
+    ```
 # YOUR TURN
 
 The task i have for you is the make a set using python and add numbers to a set using a for loop 

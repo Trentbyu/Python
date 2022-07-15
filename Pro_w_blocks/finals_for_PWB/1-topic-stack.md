@@ -11,9 +11,11 @@ STACK
 10.	advantages and disadvantages: Advantages of Stack, A Stack helps to manage the data in the ‘Last in First out’ method. When the variable is
 not used outside the function in any program, the Stack can be used. It allows you to control and handle memory allocation and deallocation.
 It helps to automatically clean up the objects. Disadvantages of Stack It is difficult in Stack to create many objects as it increases the risk of the Stack overflow. It has very limited memory. In Stack, random access is not possible.
+11. speed is o(1) average case and 0(n) worst case. The time complexity for insertion is O(1) while deletion is O(n) (in the worst case) for a single operation. The amortized costs for both are O(1) since having to delete n elements from the queue still takes O(n) time.
+12. erros that can occure: Our stack can cause errors or exceptions, too. Underflow and overflow are two possible ways to generate these. Underflow happens when we try to pop an item from an empty stack. Overflow happens when we try to push more items on a stack than it can hold
 
     ![](2022-07-15-13-16-50.png)
-
+    ```python
             class Node:
                 """
                 Each node of the linked list will have data and links to the 
@@ -224,12 +226,12 @@ It helps to automatically clean up the objects. Disadvantages of Stack It is dif
                 output += "]"
                 return output
 
+    ```
 
-
-# YOUR TURn
+# YOUR TURN
 
 ADD CODE TO THIS PROGRAM TO REMOVE A ITEM FROM THE STACK
-
+    ```python
         class Node:
             def __init__(self, value):
                 self.value = value
@@ -298,3 +300,4 @@ ADD CODE TO THIS PROGRAM TO REMOVE A ITEM FROM THE STACK
                 remove = stack.pop()
                 print(f"Pop: {remove}")
             print(f"Stack: {stack}")
+    ```
